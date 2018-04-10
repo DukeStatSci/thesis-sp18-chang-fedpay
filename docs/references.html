@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="" />
+  
+  
+  
+
+<meta name="author" content="Jerry Chia-Rui Chang">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="6-pooled-analysis.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"></a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="abstract.html"><a href="abstract.html"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="1" data-path="1-introduction.html"><a href="1-introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="2-data.html"><a href="2-data.html"><i class="fa fa-check"></i><b>2</b> Data</a><ul>
+<li class="chapter" data-level="2.1" data-path="2-data.html"><a href="2-data.html#introduction-of-data"><i class="fa fa-check"></i><b>2.1</b> Introduction of Data</a></li>
+<li class="chapter" data-level="2.2" data-path="2-data.html"><a href="2-data.html#identify-sub-population"><i class="fa fa-check"></i><b>2.2</b> Identify Sub-population</a></li>
+<li class="chapter" data-level="2.3" data-path="2-data.html"><a href="2-data.html#missing-data"><i class="fa fa-check"></i><b>2.3</b> Missing Data</a></li>
+<li class="chapter" data-level="2.4" data-path="2-data.html"><a href="2-data.html#assessing-missing-data"><i class="fa fa-check"></i><b>2.4</b> Assessing Missing Data</a></li>
+<li class="chapter" data-level="2.5" data-path="2-data.html"><a href="2-data.html#addressing-missing-data"><i class="fa fa-check"></i><b>2.5</b> Addressing Missing Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-imputation-of-missing-data.html"><a href="3-imputation-of-missing-data.html"><i class="fa fa-check"></i><b>3</b> Imputation of Missing Data</a><ul>
+<li class="chapter" data-level="3.1" data-path="3-imputation-of-missing-data.html"><a href="3-imputation-of-missing-data.html#overview-of-multiple-imputation"><i class="fa fa-check"></i><b>3.1</b> Overview of Multiple Imputation</a></li>
+<li class="chapter" data-level="3.2" data-path="3-imputation-of-missing-data.html"><a href="3-imputation-of-missing-data.html#specifying-predictive-conditional-distribution---the-cart-method"><i class="fa fa-check"></i><b>3.2</b> Specifying Predictive Conditional Distribution - the CART method</a></li>
+<li class="chapter" data-level="3.3" data-path="3-imputation-of-missing-data.html"><a href="3-imputation-of-missing-data.html#improving-computational-efficiency"><i class="fa fa-check"></i><b>3.3</b> Improving Computational Efficiency</a></li>
+<li class="chapter" data-level="3.4" data-path="3-imputation-of-missing-data.html"><a href="3-imputation-of-missing-data.html#imputation-results-and-posterior-predictive-checks"><i class="fa fa-check"></i><b>3.4</b> Imputation Results and Posterior Predictive Checks</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-modeling-of-imputed-dataset.html"><a href="4-modeling-of-imputed-dataset.html"><i class="fa fa-check"></i><b>4</b> Modeling of Imputed Dataset</a><ul>
+<li class="chapter" data-level="4.1" data-path="4-modeling-of-imputed-dataset.html"><a href="4-modeling-of-imputed-dataset.html#outcome-variable-and-selection-of-covariates"><i class="fa fa-check"></i><b>4.1</b> Outcome Variable and Selection of Covariates</a></li>
+<li class="chapter" data-level="4.2" data-path="4-modeling-of-imputed-dataset.html"><a href="4-modeling-of-imputed-dataset.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>4.2</b> Exploratory Data Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-model-fitting.html"><a href="5-model-fitting.html"><i class="fa fa-check"></i><b>5</b> Model Fitting</a><ul>
+<li class="chapter" data-level="5.1" data-path="5-model-fitting.html"><a href="5-model-fitting.html#spline-logistic-regression"><i class="fa fa-check"></i><b>5.1</b> Spline Logistic Regression</a></li>
+<li class="chapter" data-level="5.2" data-path="5-model-fitting.html"><a href="5-model-fitting.html#frequentist---maximum-likelihood-approach"><i class="fa fa-check"></i><b>5.2</b> Frequentist - Maximum Likelihood Approach</a></li>
+<li class="chapter" data-level="5.3" data-path="5-model-fitting.html"><a href="5-model-fitting.html#bayesian---posterior-distribution"><i class="fa fa-check"></i><b>5.3</b> Bayesian - Posterior Distribution</a></li>
+<li class="chapter" data-level="5.4" data-path="5-model-fitting.html"><a href="5-model-fitting.html#final-model"><i class="fa fa-check"></i><b>5.4</b> Final Model</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html"><i class="fa fa-check"></i><b>6</b> Pooled Analysis</a><ul>
+<li class="chapter" data-level="6.1" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#pooled-results"><i class="fa fa-check"></i><b>6.1</b> Pooled Results</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#frequentist-model"><i class="fa fa-check"></i><b>6.1.1</b> Frequentist Model</a></li>
+<li class="chapter" data-level="6.1.2" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#bayesian-model"><i class="fa fa-check"></i><b>6.1.2</b> Bayesian Model</a></li>
+<li class="chapter" data-level="6.1.3" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#comparison-between-frequentist-and-bayesian-model"><i class="fa fa-check"></i><b>6.1.3</b> Comparison between Frequentist and Bayesian Model</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#inference"><i class="fa fa-check"></i><b>6.2</b> Inference</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+<!--
+This manually sets the header for this unnumbered chapter.
+-->
+
+<!--
+To remove the indentation of the first entry.
+-->
+
+<!--
+To create a hanging indent and spacing between entries.  These three lines may need to be removed for styles that don't require the hanging indent.
+-->
+<p>  </p>
+<!--
+This is just for testing with more citations for the bibliography at the end.  Add other entries into the list here if you'd like them to appear in the bibliography even if they weren't explicitly cited in the document.
+-->
+
+<div id="refs" class="references">
+<div>
+<p>Barrientos, A. F., Bolton, A., Balmat, T., Reiter, J. P., Figueiredo, J. M. de, Machanavajjhala, A., … DeLong, M. (2017). A framework for sharing confidential research data, applied to investigating differential pay by race in the us government. <em>arXiv Preprint arXiv:1705.07872</em>.</p>
+</div>
+<div>
+<p>Burgette, L. F., &amp; Reiter, J. P. (2010). Multiple imputation for missing data via sequential regression trees. <em>American Journal of Epidemiology</em>, <em>172</em>(9), 1070–1076.</p>
+</div>
+<div>
+<p>Carey, M. P. (2011). <em>Senior executive service: Background and options for reform</em>. DIANE Publishing.</p>
+</div>
+<div>
+<p>Collins, L. M., Schafer, J. L., &amp; Kam, C.-M. (2001). A comparison of inclusive and restrictive strategies in modern missing data procedures. <em>Psychological Methods</em>, <em>6</em>(4), 330.</p>
+</div>
+<div>
+<p>Doove, L. L., Van Buuren, S., &amp; Dusseldorp, E. (2014). Recursive partitioning for missing data imputation in the presence of interaction effects. <em>Computational Statistics &amp; Data Analysis</em>, <em>72</em>, 92–104.</p>
+</div>
+<div>
+<p>Guide to the senior executive service. (2017), 2–12.</p>
+</div>
+<div>
+<p>Little, R. J., &amp; Rubin, D. B. (2014). <em>Statistical analysis with missing data</em>. John Wiley &amp; Sons.</p>
+</div>
+<div>
+<p>Office of Personal Management (OPM). (n.d.). Pay &amp; leave. Retrieved from <a href="https://www.opm.gov/policy-data-oversight/pay-leave/pay-administration/fact-sheets/pay-plans/" class="uri">https://www.opm.gov/policy-data-oversight/pay-leave/pay-administration/fact-sheets/pay-plans/</a></p>
+</div>
+<div>
+<p>Powell, G. N., &amp; Butterfield, D. A. (1994). Investigating the “glass ceiling” phenomenon: An empirical study of actual promotions to top management. <em>Academy of Management Journal</em>, <em>37</em>(1), 68–86.</p>
+</div>
+<div>
+<p>Statement of Jeffrey D. Zients, U.S. Congress, Senate Committee on Homeland Security and Governmental Affairs, Subcommittee on Oversight of Government Management, the Federal Workforce, and the District of Columbia. (2011).</p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="6-pooled-analysis.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": [["thesis.pdf", "PDF"], ["thesis.epub", "EPUB"], ["thesis.docx", "Word"]],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

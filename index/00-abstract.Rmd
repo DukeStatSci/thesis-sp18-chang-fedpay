@@ -1,0 +1,11 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# Abstract {.unnumbered}
+
+The preface pretty much says it all.  \par
+
+Second paragraph of abstract starts here.

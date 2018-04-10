@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="" />
+  
+  
+  
+
+<meta name="author" content="Jerry Chia-Rui Chang">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="2-data.html">
+<link rel="next" href="4-modeling-of-imputed-dataset.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"></a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="abstract.html"><a href="abstract.html"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="1" data-path="1-introduction.html"><a href="1-introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="2-data.html"><a href="2-data.html"><i class="fa fa-check"></i><b>2</b> Data</a><ul>
+<li class="chapter" data-level="2.1" data-path="2-data.html"><a href="2-data.html#introduction-of-data"><i class="fa fa-check"></i><b>2.1</b> Introduction of Data</a></li>
+<li class="chapter" data-level="2.2" data-path="2-data.html"><a href="2-data.html#identify-sub-population"><i class="fa fa-check"></i><b>2.2</b> Identify Sub-population</a></li>
+<li class="chapter" data-level="2.3" data-path="2-data.html"><a href="2-data.html#missing-data"><i class="fa fa-check"></i><b>2.3</b> Missing Data</a></li>
+<li class="chapter" data-level="2.4" data-path="2-data.html"><a href="2-data.html#assessing-missing-data"><i class="fa fa-check"></i><b>2.4</b> Assessing Missing Data</a></li>
+<li class="chapter" data-level="2.5" data-path="2-data.html"><a href="2-data.html#addressing-missing-data"><i class="fa fa-check"></i><b>2.5</b> Addressing Missing Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-imputation-of-missing-data.html"><a href="3-imputation-of-missing-data.html"><i class="fa fa-check"></i><b>3</b> Imputation of Missing Data</a><ul>
+<li class="chapter" data-level="3.1" data-path="3-imputation-of-missing-data.html"><a href="3-imputation-of-missing-data.html#overview-of-multiple-imputation"><i class="fa fa-check"></i><b>3.1</b> Overview of Multiple Imputation</a></li>
+<li class="chapter" data-level="3.2" data-path="3-imputation-of-missing-data.html"><a href="3-imputation-of-missing-data.html#specifying-predictive-conditional-distribution---the-cart-method"><i class="fa fa-check"></i><b>3.2</b> Specifying Predictive Conditional Distribution - the CART method</a></li>
+<li class="chapter" data-level="3.3" data-path="3-imputation-of-missing-data.html"><a href="3-imputation-of-missing-data.html#improving-computational-efficiency"><i class="fa fa-check"></i><b>3.3</b> Improving Computational Efficiency</a></li>
+<li class="chapter" data-level="3.4" data-path="3-imputation-of-missing-data.html"><a href="3-imputation-of-missing-data.html#imputation-results-and-posterior-predictive-checks"><i class="fa fa-check"></i><b>3.4</b> Imputation Results and Posterior Predictive Checks</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-modeling-of-imputed-dataset.html"><a href="4-modeling-of-imputed-dataset.html"><i class="fa fa-check"></i><b>4</b> Modeling of Imputed Dataset</a><ul>
+<li class="chapter" data-level="4.1" data-path="4-modeling-of-imputed-dataset.html"><a href="4-modeling-of-imputed-dataset.html#outcome-variable-and-selection-of-covariates"><i class="fa fa-check"></i><b>4.1</b> Outcome Variable and Selection of Covariates</a></li>
+<li class="chapter" data-level="4.2" data-path="4-modeling-of-imputed-dataset.html"><a href="4-modeling-of-imputed-dataset.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>4.2</b> Exploratory Data Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-model-fitting.html"><a href="5-model-fitting.html"><i class="fa fa-check"></i><b>5</b> Model Fitting</a><ul>
+<li class="chapter" data-level="5.1" data-path="5-model-fitting.html"><a href="5-model-fitting.html#spline-logistic-regression"><i class="fa fa-check"></i><b>5.1</b> Spline Logistic Regression</a></li>
+<li class="chapter" data-level="5.2" data-path="5-model-fitting.html"><a href="5-model-fitting.html#frequentist---maximum-likelihood-approach"><i class="fa fa-check"></i><b>5.2</b> Frequentist - Maximum Likelihood Approach</a></li>
+<li class="chapter" data-level="5.3" data-path="5-model-fitting.html"><a href="5-model-fitting.html#bayesian---posterior-distribution"><i class="fa fa-check"></i><b>5.3</b> Bayesian - Posterior Distribution</a></li>
+<li class="chapter" data-level="5.4" data-path="5-model-fitting.html"><a href="5-model-fitting.html#final-model"><i class="fa fa-check"></i><b>5.4</b> Final Model</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html"><i class="fa fa-check"></i><b>6</b> Pooled Analysis</a><ul>
+<li class="chapter" data-level="6.1" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#pooled-results"><i class="fa fa-check"></i><b>6.1</b> Pooled Results</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#frequentist-model"><i class="fa fa-check"></i><b>6.1.1</b> Frequentist Model</a></li>
+<li class="chapter" data-level="6.1.2" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#bayesian-model"><i class="fa fa-check"></i><b>6.1.2</b> Bayesian Model</a></li>
+<li class="chapter" data-level="6.1.3" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#comparison-between-frequentist-and-bayesian-model"><i class="fa fa-check"></i><b>6.1.3</b> Comparison between Frequentist and Bayesian Model</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#inference"><i class="fa fa-check"></i><b>6.2</b> Inference</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="imputation-of-missing-data" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Imputation of Missing Data</h1>
+<div id="overview-of-multiple-imputation" class="section level2">
+<h2><span class="header-section-number">3.1</span> Overview of Multiple Imputation</h2>
+<p>Multiple Imputation (MI) is a flexible approach for researchers to address the problem of missing data. The approach of Multivariate Imputation by Chained Equation (MICE), where multiple imputed datasets are created through drawing samples sequentially from predictive conditional distribution, would be applied to generate the completed datasets.<br />
+</p>
+<p>The methods for carrying out multiple imputation involve (1) Fill in the missing columns through drawing values from predictive conditional distribution to produce <span class="math inline">\(m\)</span> completed datasets (2) For each completed dataset, conduct analysis for parameters of interest (3) Combine individual analysis to form final results. <span class="citation">(Little &amp; Rubin, 2014)</span> Currently, different methods exist for specifying predictive conditional distributions. We would explore the suitability of each method and select the best approach.</p>
+<p><strong>Multivariate Imputation by Chained Equations (MICE)</strong></p>
+<p>To generate <span class="math inline">\(m\)</span> complete datasets, we would apply Multivariate Imputation by Chained Equations (MICE). MICE is one of the most popular approach for imputing missing data. It provides flexible imputation results and can handle both continuous and categorical data. The implementations of MICE involve</p>
+<p>Assume we have an <span class="math inline">\(n\)</span>x<span class="math inline">\(k\)</span> data matrix <span class="math inline">\(Y\)</span>, where <span class="math inline">\(Y_1, Y_2, .., Y_j\)</span> are completely observed and <span class="math inline">\(Y_{j+1}, Y_{j+2}, ..., Y_k\)</span> are partially observed.</p>
+<p><strong>Step 1</strong><br />
+For <span class="math inline">\(i = j+1, ... , k,\)</span>, fill in initial missing values of <span class="math inline">\(Y_i\)</span> through draws from predictive distribution conditional on <span class="math inline">\(Y_1, Y_2, ..., Y_j\)</span>.<br />
+<strong>Step 2</strong><br />
+(a) For <span class="math inline">\(i = j+1, ... , k,\)</span>, construct a predictive distribution fully conditional on <span class="math inline">\(Y_{-i} = Y_1, Y_2, ... , Y_{i-1}, Y_{i+1}, ... , Y_k\)</span>.<br />
+(b) Draw values from the conditional distribution <span class="math inline">\(Y_i|Y_{-i}\)</span> and update the original missing values of column <span class="math inline">\(Y_i\)</span>.<br />
+<strong>Step 3</strong> Perform step 2 <span class="math inline">\(l\)</span> times.<br />
+<strong>Step 4</strong> Perform step 1-3 <span class="math inline">\(m\)</span> times. </p>
+<p>Since the robustness of MICE is highly dependent on the predictive conditional distribution, one of the strategy to improve the imputations is to include “auxiliary variable” that are related to the missingness but not part of the covariates. Indeed, the inclusion of “auxiliary variable” can make the MAR assumption more reasonable. <span class="citation">(Collins, Schafer, &amp; Kam, 2001)</span> In the OPM data, variables such as <em>pay plan</em> and <em>step rate</em> are not of interest to the final analysis, but they provide information on the missingness of <em>salary</em> and <em>grade</em>. Another auxiliary variable we include is salary from working year 11 to 15. Though we are only interested in the rate of change in salary between working year 1 and 10, salary from working year 11 to 15 can help predict past salary information. </p>
+</div>
+<div id="specifying-predictive-conditional-distribution---the-cart-method" class="section level2">
+<h2><span class="header-section-number">3.2</span> Specifying Predictive Conditional Distribution - the CART method</h2>
+<p>In the practice of MICE, one of the most common models for specifying predictive conditional distribution is Generalized Linear Models (GLMs). GLMs such as multiple linear regressions are flexible parametric models, and usually produce consistent imputation results. However, if the data to be imputed contain hundreds of variables, GLMs might be too simple to capture the true distribution. For example, relationships among variables might be interactive and non-linear. Specifying parametric models for data with great complexity is therefore inappropriate. <span class="citation">(Burgette &amp; Reiter, 2010)</span> </p>
+<p>Currently, the OPM data contains 65 variables, and each categorical variable has various levels. Since non-linear relationships might exist among multiple variables and levels, specifying the standard GLMs on the conditional distribution would lead to biased parameter estimates and produce inconsistent results. To address this challenge, non-parametric model is more appropriate; specifically, Classification and Regression Trees (CART) would be used to impute missing data. </p>
+<p>The CART algorithm performs binary splits of the predictors recursively to approximate the conditional distribution of a univariate outcome. The partitions are found if the subsets of units have relatively homogeneous outcomes. The leaf would be reached after multiple partitions, with values in each leaf representing the conditional distribution of the outcome. If the outcome variable is categorical, Classification Tree would be adopted; on the other hand, Regression Tree would be implemented if the outcome variable is continuous. For its application in MICE, we would use CART to derive the conditional distribution for each <span class="math inline">\(Y_i\)</span> on the completely observed variables in step 1 and each <span class="math inline">\(Y_i\)</span> given <span class="math inline">\(Y_{-i}\)</span> in step 2. <span class="citation">(Burgette &amp; Reiter, 2010)</span> <span class="citation">(Doove, Van Buuren, &amp; Dusseldorp, 2014)</span> </p>
+<p>Though one of the disadvantages of the CART method is its difficulty for model interpretations when the number of variables is high, it should not be our major concern because the goal for adopting CART method is to plausibly impute the missing data. Indeed, the application of non-parametric CART models in MICE can result in “more reliable inferences compared with naive applications of MICE”. <span class="citation">(Burgette &amp; Reiter, 2010)</span></p>
+<ul>
+<li>Add an example of CART</li>
+<li>Add why choose not to purn the tree</li>
+<li>Specifiy minimum heterogeneity (cp values or reduction in gini index)</li>
+</ul>
+</div>
+<div id="improving-computational-efficiency" class="section level2">
+<h2><span class="header-section-number">3.3</span> Improving Computational Efficiency</h2>
+<p>The CART method is computationally efficient if predictors to be split are continuous variables. Specifically, because continuous data will be sorted in ascending order before partitions, it reduces the computational complexity. On the other hand, if predictors to be split are categorical variables, the CART method might encounter computational difficulties when the number of levels is large. For example, if a categorical variable has n levels, the CART method would examine every possible splits, which results to <span class="math inline">\(2^{n}\)</span> possible partitions. Indeed, the <em>grade</em> categorical variables in the OPM data has more than 20 levels, which means there are more than <span class="math inline">\(2^{20} \approx 1\)</span> million possible partitions.</p>
+<p>One solution to increase the computational efficiency of the CART imputation method is to reduce the number of levels for categorical variables. For example, the number of levels for variable <em>pay plan</em> is reduced from 173 categories into 7 categories. The OPM defines pay plan as “a two-digit alphabetical code used to identify Federal civilian pay systems”. <span class="citation">(Office of Personal Management (OPM), n.d.)</span> The most common pay plan in the OPM data is the General Schedule pay system, which covers around 78 percent of white-collar Federal employees. Employees who have unique occupations or serve for particular agency are covered by other pay plans. For example, the <em>AL</em> pay plan applies to administrative law judges, and <em>SV</em> refers to pay plan in the Transportation Security Administration. Since some of the pay plan codes are applicable to relatively small subset of population, we decide to merge pay plan from 173 categories into 7 categories. The summary of the simplified pay plan is shown in the table below.</p>
+<table>
+<caption><em>Abbreviated Pay Plan</em></caption>
+<thead>
+<tr class="header">
+<th><strong>Type</strong></th>
+<th><strong>Codes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>General Schedule</td>
+<td>GS, GM</td>
+</tr>
+<tr class="even">
+<td>Non General Schedule</td>
+<td>AD, ES, SV, VN, Others</td>
+</tr>
+</tbody>
+</table>
+<p>Another strategy used to increase the computational efficiency for MICE is through applying parallel computing technique on <em>Step 4</em> of the MICE. The implementation of the parallel computing includes:</p>
+<p>Assume we want to impute <span class="math inline">\(m\)</span> completed datasets with <span class="math inline">\(n\)</span> cores.</p>
+<p><strong>If (<span class="math inline">\(m \leq n\)</span>)</strong><br />
+allocate <span class="math inline">\(m\)</span> cores<br />
+conduct <em>Step 1</em> to <em>Step 3</em> once for each core in parallel</p>
+<p><img src="figure/parallel_less.png" scale=0.5 style="display: block; margin: auto;" /></p>
+<p><strong>else</strong><br />
+allocate <span class="math inline">\(n\)</span> cores<br />
+conduct <em>Step 1</em> to <em>Step 3</em> <span class="math inline">\(\lfloor{\frac{n}{m}}\rfloor\)</span> times for each core in parallel</p>
+<p><img src="figure/parallel_more.png" scale=0.5 style="display: block; margin: auto;" /></p>
+</div>
+<div id="imputation-results-and-posterior-predictive-checks" class="section level2">
+<h2><span class="header-section-number">3.4</span> Imputation Results and Posterior Predictive Checks</h2>
+<p>12 completed datasets are generated from the imputation model. Since the validity of the imputed datasets depends on the use of an appropriate imputation model, it is important to check whether the imputation model yields reasonable results. Specifically, posterior predictive checks (PPC) would be adopted to assess imputation model adequacy. PPC is a Bayesian model checking technique designed to investigate the potential model inadequacy between imputed and replicated datasets. Though our imputation model is not fully Bayesian, PPC could still be applied to measure the predictive differences between imputed and replicated data. (citation)</p>
+<p>Denote <span class="math inline">\(Y = (Y_{1}, Y_{2}) = ((Y_{1,obs}, Y_{1,mis}), Y_{2}))\)</span>, where <span class="math inline">\(Y_{1}\)</span> is partially observed and <span class="math inline">\(Y_{2}\)</span> is completely observed. To generate replicated data <span class="math inline">\(Y_{com}^{rep}\)</span>, we need to (1) create duplicates of <span class="math inline">\((Y_{1}, Y_{2})\)</span> (2) set duplicated <span class="math inline">\(Y_{1}\)</span> as completely missing (3) combine <span class="math inline">\(((Y_{1,obs}, Y_{1,mis}), Y_{2})\)</span> and <span class="math inline">\((Y_{com}^{rep}, Y_{2})\)</span> to form concatenated dataset (4) re-impute concatenated dataset with original imputation model. Figure <a href="3-imputation-of-missing-data.html#fig:PPC">3.1</a> shows the re-imputation process. (citation) Since our parameter of interest is the relationship between year 1 and year 10 salary, we compare the distribution of these variables between imputed and replicated datasets. If the distribution of these two variables are similar between imputed and replicated datasets, then we can conclude that the imputation model provides good fit to the data.</p>
+<div class="figure" style="text-align: center"><span id="fig:PPC"></span>
+<img src="figure/PPC.jpg" alt="Generate replicated dataset"  />
+<p class="caption">
+Figure 3.1: Generate replicated dataset
+</p>
+</div>
+<p>Two different methods are used to generate replicated dataset. First, conduct re-imputation by setting duplicated <span class="math inline">\(Y_{1}\)</span> (variables with missing values) as completely missing. Second, conduct re-imputation by only setting salary at working year 1 and 10 in duplicated <span class="math inline">\(Y_{1}\)</span> as completely missing. The distribution between imputed and replicated dataset is shown by Figure <a href="3-imputation-of-missing-data.html#fig:PPC1">3.2</a> for the first method, and Figure <a href="3-imputation-of-missing-data.html#fig:PPC2">3.3</a> for the second method. The first method indicates that our imputation model is not a good fit to the data. However, this result is generally expected because the imputed values of year 1 and year 10 salary are highly dependent on other partially missing variables. The second method provides a better model diagnostic. The distribution between imputed and replicated datasets are similar, which implies that our imputation model provides good fit to the data.</p>
+<div class="figure" style="text-align: center"><span id="fig:PPC1"></span>
+<img src="figure/PPC1.png" alt="Method 1"  />
+<p class="caption">
+Figure 3.2: Method 1
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:PPC2"></span>
+<img src="figure/PPC2.png" alt="Method 2"  />
+<p class="caption">
+Figure 3.3: Method 2
+</p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="2-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="4-modeling-of-imputed-dataset.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": [["thesis.pdf", "PDF"], ["thesis.epub", "EPUB"], ["thesis.docx", "Word"]],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

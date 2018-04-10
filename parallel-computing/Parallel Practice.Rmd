@@ -1,0 +1,62 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Example 1 - parallel lapply
+```{r}
+library(parallel)
+# Calculate the number of cores
+no_cores <- detectCores() - 1
+# Initiate cluster
+cl <- makeCluster(no_cores)
+
+#parLapply
+parLapply(cl, 2:4,
+          function(exponent)
+            2^exponent)
+
+#close cluster 
+stopCluster(cl)
+```
+
+Example 2 - Export variable and package
+```{r}
+cl <- makeCluster(no_cores)
+
+base <- 2
+clusterExport(cl, "base") #Export variable 
+clusterEvalQ(cl, library(mice)) #Export package
+parLapply(cl, 
+          2:4, 
+          function(exponent) 
+            base^exponent)
+ 
+parSapply(cl, 2:4, 
+          function(exponent) 
+            base^exponent)
+
+stopCluster(cl)
+```
+
+Example 3 - foeach
+```{r}
+library(foreach)
+library(doParallel)
+ 
+cl<-makeCluster(no_cores)
+registerDoParallel(cl)
+base <- 2
+clusterExport(cl, "base") #Export variable 
+
+test <- function (exponent) {
+  foreach(exponent = 2:4, 
+          .combine = c,
+          .export = "base")  %dopar%  
+    base^exponent
+}
+test()
+ 
+stopCluster(cl)
+```
+
