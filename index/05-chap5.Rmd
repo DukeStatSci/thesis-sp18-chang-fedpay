@@ -29,9 +29,9 @@ According to the results from exploratory data analysis, we fit a model based on
 
 ##Spline Logistic Regression
 
-In Generalized Linear Models (GLMs), the coefficients of predictors on univariate outcome variable Y is usually linear. However, the binnedplot of predictor year 10 salary shows that the relationship between outcome variable and year 10 salary is non-linear. In order to capture the non-linear relationship, one common strategy is to incorporate smoothing techniques such as the application of spline function into the GLMs. A semi-parametric spline logistic regression is therefore used to model the data.
+In Generalized Linear Models (GLMs), the coefficients of predictors on univariate outcome variable Y is usually linear. However, the binnedplot of predictor year 10 salary shows that the relationship between outcome variable and year 10 salary is non-linear. In order to capture the non-linear relationship, one common strategy is to incorporate smoothing techniques such as the application of spline function into the GLMs. A semi-parametric spline logistic regression is therefore used to model the data. [@Walther2017]
 
-To recap the relationship between year 10 salary and outcome variable, the proportion of ones below certain salary level is relatively flat, whereas the proportion of ones above certain salary level increases significantly. (Figure \@ref(fig:salarybinned2)) This indicates that the coefficient slopes should be different for salary above and below certain level, which can be modeled by a spline function.
+To recap the relationship between year 10 salary and outcome variable, the proportion of ones below certain salary level is relatively flat, whereas the proportion of ones above certain salary level increases significantly. (Figure \@ref(fig:salarybinned2)) This indicates that the coefficient slopes should be different for salary above and below certain level, which can be modeled by a spline function. 
 
 ```{r salarybinned2, fig.cap="Year 10 Salary Binned Plot",echo=FALSE}
 include_graphics(path = "figure/salary_binned2.png")
@@ -47,28 +47,36 @@ $$
 \end{cases}
 $$
 
-Because the shapes of both segments (blue and red segments in the binned plot) are close to linear, the degree of the spline function is 1. A knot is chosen as the cut point between the two segments, which takes the value of \$77,100. (Since year 10 salary is centered and scaled, this cut point should be $\dfrac{77,180 - 82,425}{10,000} = -0.5425$.) 
+In order to select knots in a more granular level, we create another binned plot with 25 bins. (Fig \@ref(fig:salarybinned3)) To avoid overfitting, the degree of the spline function is chosen as 1. 
+
+```{r salarybinned3, fig.cap="Year 10 Salary Binned Plot",echo=FALSE}
+include_graphics(path = "figure/salary_binned3.png")
+```
+
+
+The first knot is chosen as the cut point between black and blue segments, which takes the value of \$71,674. (Since year 10 salary is centered and scaled, this cut point should be $\dfrac{71,674 - 82,425}{10,000} = -1.0751$.) The second knot is chosen as the cut point between blue and red segments, which takes the value of \$84,697. (Since year 10 salary is centered and scaled, this cut point should be $\dfrac{84,697 - 82,425}{10,000} = 0.2272$.)
 
 Denote $x$ as the year 10 salary after transformation. The equation for the piecewise linear spline is
 $$
 \begin{aligned}
-y & = \beta_{0} + \beta_{1}x + \beta_{2}(x - (-0.5425))_{+} \\
-& = \beta_{0} + \beta_{1}x + \beta_{2}(x + 0.5425)(I[x \geq -0.5425])
+y & = \beta_{0} + \beta_{1}x + \beta_{2}(x - (-1.0751))_{+} + \beta_{3}(x - 0.2272)_{+} \\
+& = \beta_{0} + \beta_{1}x + \beta_{2}(x + 1.0751)(I[x \geq -1.0751]) + \beta_{3}(x - 0.2272)(I[x \geq 0.2272])
 \end{aligned}
 $$
 
-If year 10 salary is below the cut point, the coefficient $\beta_{2}$ would be equal to 0. On the other hand, if year 10 salary is above the cut point, the coefficient $\beta_{2}$ would help capture the difference in slopes. To sum up, we can rewrite the above equation as
+If year 10 salary is below the cut point, the coefficient $\beta_{2}$ and $\beta_{3}$ would be equal to 0. If year 10 salary is above the first/second cut point, the coefficient $\beta_{2}$ and $\beta_{3}$ would help capture the difference in slopes. To sum up, we can rewrite the above equation as
 $$
 y = 
 \begin{cases}
-    \beta_{0} + \beta_{1}x, & x < -0.5425\\
-    \beta_{0} + \beta_{1}x + \beta_{2}(x + 0.5425)(I[x \geq -0.5425]), & x \geq -0.5425
+    \beta_{0} + \beta_{1}x, & x < -1.0751\\
+    \beta_{0} + \beta_{1}x + \beta_{2}(x - (-1.0751))_{+}, & -1.0751 \leq x < 0.2272 \\
+    \beta_{0} + \beta_{1}x + \beta_{2}(x - (-1.0751))_{+} + \beta_{3}(x - 0.2272)_{+}, & x \geq 0.2272
 \end{cases}
 $$
 
 **Baseline**
 
-Other than year 10 salary, the rest of the covariates are categorical variables. Given that the proportion of ones in outcome variable is small, it is important to select reasonable baseline for each categorical variable. For variable _Gender_, we would like to learn whether women were put in disadvantages during promotion, so male is the baseline. For variable _Race_, since the population size for white is the largest, white is the baseline. For variable _Education Level_, Bachelor's degree is the baseline because it is the most common degree federal employees earned. For variable _Department Switch_, switch is the baseline. For variable _Occupational Category_, Professional is the baseline. For variable _Supervisory Status_, supervisor is the baseline. For variable _Year 10 Grade_, grade above 13 is the baseline. For variable _Change in Pay Rate_, change2 (annual rate change between 5-10%) is the baseline.
+Other than year 10 salary, the rest of the covariates are categorical variables. Given that the proportion of ones in outcome variable is small, it is important to select reasonable baseline for each categorical variable. For variable _Gender_, we would like to learn whether women were put in disadvantages during promotion, so male is the baseline. For variable _Race_, since the population size for white is the largest, white is the baseline. For variable _Education Level_, Bachelor's degree is the baseline because it is the most common degree federal employees earned. For variable _Department Switch_, switch is the baseline. For variable _Occupational Category_, Professional is the baseline. For variable _Supervisory Status_, supervisor is the baseline. For variable _Year 10 Grade_, grade 1 (grade 13 & 14) is the baseline. For variable _Change in Pay Rate_, change2 (annual rate change between 5-10%) is the baseline.
 
 **Model Form (Full Model) **
 
@@ -76,8 +84,10 @@ To sum up, the model takes the following form.
 $$
 \begin{aligned}
 logit(p) & = \beta_{0}+ \beta_{1}\text{Female} + \beta_{2}\text{OccA} + \beta_{3}\text{OccO} + \beta_{4}\text{EducA} + \beta_{5}\text{EducC} + \beta_{6}\text{EducD} \\
-& + \beta_{7}\text{EducE} +  \beta_{8}\text{Non-White} + \beta_{9}\text{NoSwitch} + \beta_{10}\text{Non-Supervisor} + \beta_{11}\text{Grade0} \\
-& + \beta_{12}\text{Salary} + \beta_{13}(\text{Salary} + 0.5425)*I[\text{Salary} \geq 0.5425] + \beta_{14}\text{Change1} + \beta_{15}\text{Change3}
+& + \beta_{7}\text{EducE} +  \beta_{8}\text{Non-White} + \beta_{9}\text{NoSwitch} + \beta_{10}\text{Non-Supervisor} + \beta_{11}\text{Grade0} \\ 
+& + \beta_{12}\text{Grade2} + \beta_{13}\text{ScaledSalary} + \beta_{14}(\text{ScaledSalary} + 1.0751)*I[\text{ScaledSalary} \geq -1.0751] \\
+& + \beta_{15}(\text{ScaledSalary} - 0.2272)*I[\text{ScaledSalary} \geq 0.2272] +
+\beta_{16}\text{Change1} + \beta_{17}\text{Change3}
 \end{aligned}
 $$
 
@@ -90,35 +100,58 @@ In a frequentist setting, the estimation of model coefficients are computed thro
 
 |Coefficient | Estimate | Std. Error | p-value| 
 | :--- | :--- | :--- | :--- | 
-|(Intercept) ($\beta_{0}$) | -5.589 | 0.706 | 0.0000000000000024 |   
-|Female ($\beta_{1}$) | -0.026 |  0.106 | 0.80787 |         
-|OccA ($\beta_{2}$) | 0.766 | 0.122 | 0.0000000003766811 | 
-|OccO ($\beta_{3}$) | 1.032 | 0.539 | 0.05571 | 
-|EducA ($\beta_{4}$) | -0.742 | 0.188 | 0.0000770642309893 | 
-|EducC ($\beta_{5}$) | 0.166 | 0.125 | 0.18347 | 
-|EducD ($\beta_{6}$) | 0.240 | 0.179 | 0.17915 | 
-|EducE ($\beta_{7}$) | 0.005 | 0.207 | 0.98274 | 
-|Non-White ($\beta_{8}$) | -0.098 | 0.128 | 0.44430 | 
-|No_Switch ($\beta_{9}$) | -0.067 | 0.179 | 0.69805 |   
-|Non-Supervisor ($\beta_{10}$) | -1.063 | 0.106 | 0.0000000000000002 | 
-|Grade0 ($\beta_{11}$) | -0.705 | 0.224 | 0.00167 | 
-|Salary ($\beta_{12}$) | 2.067 | 0.672 | 0.00210 |  
-|(Salary + 0.5425) ($\beta_{13}$) | 5.248 | 0.706 | 0.0000000000001042| 
-|Change1 ($\beta_{14}$) | -0.441 | 0.132 | 0.00086 | 
-|Change3 ($\beta_{15}$) | 0.293  | 0.126 | 0.01967 |  
+|(Intercept) ($\beta_{0}$) | -5.982 |  0.7195 | 0.0000000000000002 |
+|Female ($\beta_{1}$) | -0.0302 | 0.1067 |  0.77719 |  
+|OccA ($\beta_{2}$) | 0.7595 | 0.1229 |  0.000000000651|
+|OccO ($\beta_{3}$) | 1.0337 | 0.5392 | 0.05521 | 
+|EducA ($\beta_{4}$) | -0.7109 | 0.1888 | 0.00017 |
+|EducC ($\beta_{5}$) | 0.1344 | 0.1261 | 0.28647 |   
+|EducD ($\beta_{6}$) | 0.1706 | 0.1806 | 0.34490 |  
+|EducE ($\beta_{7}$) | -0.0201 | 0.2088 | 0.92327 |
+|Non-White ($\beta_{8}$) | -0.0726 | 0.1292 | 0.57420 |
+|No_Switch ($\beta_{9}$) | -0.0360 | 0.1752 | 0.83720 |    
+|Non-Supervisor ($\beta_{10}$) | -0.9681 | 0.1083 | 0.0000000000000002 | 
+|Grade0 ($\beta_{11}$) | -0.4731 | 0.2366 | 0.04555 | 
+|Grade2 ($\beta_{12}$) | 1.3835 | 0.2043 | 0.000000000013 |
+|ScaledSalary ($\beta_{13}$) | 1.8937 | 0.6857 | 0.00575 |
+|(ScaledSalary + 1.0751) ($\beta_{14}$) | 2.8688 | 0.6840 | 0.000027431911 |
+|(ScaledSalary - 0.2272) ($\beta_{15}$) | 3.2708 | 0.8013 | 0.000044673095 |
+|Change1 ($\beta_{16}$) | -0.3359 | 0.1327  | 0.01138 |  
+|Change3 ($\beta_{17}$) | 0.2950 | 0.1269 | 0.02010 |
 
 
 _Gender_ ($\beta_{1}$), _Race_ ($\beta_{8}$), and _Switch_ ($\beta_{9}$) are not significant in predicting promotion outcomes, with their p-values much greater than 0.05. We further conduct a change in deviance test to better understand the fit of those variables. Specifically, denote $D_{0}$ as the deviance of reduced model (without _Gender_, _Race_, and _Switch_), and $D_{1}$ as the deviance of full model (original model). For large sample size, the difference between $D_{0}$ and $D_{1}$ has a chi-square distribution with degrees of freedom equal to the difference in the number of parameters estimated. The change in deviance test yields a p-value of 0.846, indicating that the inclusion of variable _Gender_, _Race_, and _Switch_ does not provide a better fit to the data. Therefore, the reduced model is a better model.
 
 **Model Diagnostic**
 
-Constant variance and normality of residuals are not assumptions for logistic regression. To check if function of predictor is well specified, binned residuals technique is applied to reduced model. In order to produce binned residuals, we first compute raw residuals for fitted logistic regression model, and order observations by values of predicted probabilities from the fitted regression. Second, for continuous predictor, we form $\sqrt{27346} \approx 165$ equally sized, ordered bins using ordered data, and  compute average residual in each bin. For categorical predictor, we compute the average residual in each level. Lastly, we plot average residual versus average predicted probability for each bin, and find specific patterns that might yield problems.
+Constant variance and normality of residuals are not assumptions for logistic regression. To check if function of predictor is well specified, binned residuals technique is applied to the reduced model. In order to produce binned residuals, we first compute raw residuals for fitted logistic regression model, and order observations by values of predicted probabilities from the fitted regression. Second, for continuous predictor, we form $\sqrt{27346} \approx 165$ equally sized, ordered bins using ordered data, and  compute average residual in each bin. For categorical predictor, we compute the average residual in each level. Lastly, we plot average residual versus average predicted probability for each bin, and find specific patterns that might yield problems.
 
-According to binned residuals plot (Figure \@ref(fig:residualsbinned)), the average residuals are close to 0 for scaled salary less than 0 (corresponds to \$82,425), but tend to have more fluctuation for scaled salary greater than 0. The fluctuation is caused by small proportion of ones in outcome variable and shouldn't be of concern. For categorical variable, because the number of level is limited and the prediction would yield 0 (not promoted) majority of the time, the average residuals for each bin are small. (table) In general, no extreme residuals are observed, and we can conclude that the model provides reasonable fit to the data.
+According to binned residuals plot (Figure \@ref(fig:residualsbinned)), the average residuals are close to 0 for scaled salary less than 0 (corresponds to \$82,425), but have more fluctuation for scaled salary greater than 0. The fluctuation is caused by the sparsity of the data in higher salary values, and we should especially be careful with the model predictive probability. For categorical variable, because the number of level is limited and the prediction would yield 0 (not promoted) majority of the time, the average residuals for each bin are small.  In general, no extreme residuals are observed, and we can conclude that the model provides reasonable fit to the data.
 
 ```{r residualsbinned, fig.cap="Residuals Binned Plot",echo=FALSE}
 include_graphics(path = "figure/residuals_binned.png")
 ```
+[Update Binned Residuals]
+
+| P | A | O | 
+| :--- | :--- | :--- |
+| -0.000000000041 | -0.000000000104 | -0.000000000091|
+Table: *Occupational Category Residuals*
+
+| B | A | C | D | E
+| :--- | :--- | :--- | :--- | :--- |
+| -0.000000000087 | -0.000000000097 | -0.000000000068 | -0.000000000021 | -0.000000000015 |
+Table: *Education Levels Residuals*
+
+| Supervisor | Non-supervisor |
+| :--- | :--- | 
+| -0.000000000108 | -0.000000000074 |
+Table: *Supervisory Position Residuals*
+
+|  Change2 | Change1 | Change3 | 
+| :--- | :--- | :--- | 
+| -0.000000000091 | -0.000000000050 | -0.000000000072 |
+Table: *% Change Residuals* 
 
 ## Bayesian - Posterior Distribution
 
@@ -130,7 +163,7 @@ After observing the data, the likelihood of each observation can be modeled as a
 $$
 \begin{aligned}
 f(\beta_{0}) &= N(0,5)\\
-f(\beta_{k}) &= N(0,5), k = 1,...,15 \\
+f(\beta_{k}) &= N(0,5), k = 1,...,17 \\
 \end{aligned}
 $$
 
@@ -163,6 +196,7 @@ The 95% posterior interval graph (Figure  \@ref(fig:Bayesianfull)) are produced 
 ```{r Bayesianfull, fig.cap="Bayesian Full Model",echo=FALSE}
 include_graphics(path = "figure/Bayesianfull.png")
 ```
+[Update Bayesian Model Graph]
 
 ##Final Model
 
@@ -170,9 +204,11 @@ The results from both Frequentist and Bayesian suggest that the reduced model is
 $$
 \begin{aligned}
 logit(p) & = \beta_{0} + \beta_{1}\text{OccA} + \beta_{2}\text{OccO} + \beta_{3}\text{EducA} + \beta_{4}\text{EducC} + \beta_{5}\text{EducD} \\
-& + \beta_{6}\text{EducE} +  \beta_{7}\text{Non-Supervisor} + \beta_{8}\text{Grade0} \\
-& + \beta_{9}\text{Salary} + \beta_{10}(\text{Salary} + 0.5425)*I[\text{Salary} \geq 0.5425] + \beta_{11}\text{Change1} + \beta_{12}\text{Change3}
+& + \beta_{6}\text{EducE} +  \beta_{7}\text{Non-Supervisor} + \beta_{8}\text{Grade0} + \beta_{9}\text{Grade2} \\
+& + \beta_{10}\text{ScaledSalary} + \beta_{11}(\text{ScaledSalary} + 1.0751)*I[\text{ScaledSalary} \geq -1.0751] \\
+& + \beta_{12}(\text{ScaledSalary} - 0.2272)*I[\text{ScaledSalary} \geq 0.2272] +
+\beta_{13}\text{Change1} + \beta_{14}\text{Change3}
 \end{aligned}
 $$
 
-In the next chapter, we would combine model results of 12 imputed datasets, and conduct inference based on the pooled model coefficients. 
+In the next chapter, we would combine model results of 12 completed datasets, and conduct inference based on pooled model coefficients.

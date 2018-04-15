@@ -33,7 +33,7 @@ In order to conduct inference on regression slopes $\beta$, we combine model res
 
 ###Frequentist Model
 
-For each completed dataset $j$ ($j = 1,...,12$) and each regression coefficient $\beta_{ij}$ ($i = 0,...,12$), let $b_{ij}$ be the estimator of $\beta_{ij}$ from $j_{th}$ dataset, and let $u_{ij}$ be the estimator of the variance of $\beta_{ij}$ from $j_{th}$ dataset.  First, the estimate of the model coefficient $\overline{b_{i}}$ is obtained by computing the average of each dataset's estimated slope. Second, the within-dataset variance $\overline{u_{i}}$ is obtained by computing the average of each dataset's estimated slope variance. Lastly, the across-datasets variance $q_{i}$ is obtained by computing the average of the variance of the slope.
+For each completed dataset $j$ ($j = 1,...,12$) and each regression coefficient $\beta_{ij}$ ($i = 0,...,14$), let $b_{ij}$ be the estimator of $\beta_{ij}$ from $j_{th}$ dataset, and let $u_{ij}$ be the estimator of the variance of $\beta_{ij}$ from $j_{th}$ dataset.  First, the estimate of the model coefficient $\overline{b_{i}}$ is obtained by computing the average of each dataset's estimated slope. Second, the within-dataset variance $\overline{u_{i}}$ is obtained by computing the average of each dataset's estimated slope variance. Lastly, the across-datasets variance $q_{i}$ is obtained by computing the average of the variance of the slope. 
 
 $$
 \begin{aligned}
@@ -47,45 +47,52 @@ With average estimated regression coefficient ($\overline{b_{i}}$), within-datas
 
 |Coefficient | Estimate | Std. Error | 95% CI. | 
 | :--- | :--- | :--- | :--- | 
-|Intercept | -5.732 | 0.625 | [-6.556, -4.909] |
-|OccA | 0.754 | 0.015 | [0.722, 0.786] |
-|OccC | 0.986 | 0.295 | [0.849,  1.123] |
-|EducA | -0.757 | 0.035 | [-0.787, -0.727] |
-|EducC | 0.150  | 0.016 | [0.119,  0.181] |
-|EducD | 0.265  | 0.032 | [0.208,  0.321] |
-|EducE | -0.018 | 0.044 | [-0.094,  0.057] |
-|Non-Supervisor | -1.045 | 0.012 | [-1.099, -0.990] |
-|Grade0 | -0.698 | 0.059 | [-0.894, -0.502]|
-|Salary | 2.145 | 0.613 | [1.323, 2.966] |
-|(Salary + 0.5425) | 5.516 | 0.629  | [4.771, 6.261] |
-|Change1 | -0.355 | 0.026 | [-0.540, -0.170] |
-|Change3 | 0.224  | 0.025 | [0.056,  0.393] |
+|Intercept ($\beta_{0}$) | -6.116 | 0.65 | [-6.947, -5.286] |
+|OccA ($\beta_{1}$) | 0.747 | 0.015 | [0.712, 0.781] |
+|OccC ($\beta_{2}$) | 1.017 | 0.296 | [0.864,  1.170] |
+|EducA ($\beta_{3}$) | -0.713 | 0.036 | [-0.749, -0.677] |
+|EducC ($\beta_{4}$) | 0.127  | 0.016 | [0.094,  0.159] |
+|EducD ($\beta_{5}$) | 0.190  | 0.033 | [0.136,  0.243] |
+|EducE ($\beta_{6}$) | -0.042 | 0.045 | [-0.123,  0.040] |
+|Non-Supervisor ($\beta_{7}$) | -0.949 | 0.013 | [-1.007, -0.890] |
+|Grade0 ($\beta_{8}$) | -0.453 | 0.066 | [-0.658, -0.247]|
+|Grade2 ($\beta_{9}$) | 1.392 | 0.048 | [1.218,1.566] |
+|ScaledSalary ($\beta_{10}$) | 1.965 | 0.615 | [1.187, 2.742] |
+|(ScaledSalary + 1.0751) ($\beta_{11}$) | 2.949 | 0.639 | [2.111, 3.786] |
+|(ScaledSalary - 0.2272) ($\beta_{12}$) | 3.366 | 0.895 | [2.408, 4.325] |
+|Change1 ($\beta_{13}$) | -0.266 | 0.027 | [-0.459, -0.074] |
+|Change3 ($\beta_{14}$) | 0.231  | 0.025 | [0.064, 0.399] |
 Table: *Combined Coefficient Estimate, Standard Error, and 95% CI. (Frequentist's Model)*
 
 ###Bayesian Model
 
-For Bayesian model, instead of averaging out the estimated regression coefficients, the pooled results are obtained through applying the approach proposed by Zhou and Reiter (2010). For each completed dataset $l = 1,...,m$ and parameter of interest $Q$, denote $Q^{(l)}$ as the MCMC draws from posterior distribution. First, simulate $J$ values of posterior draws (where $J$ is large) from each $Q^{(l)}$, with its distribution denoted as $\hat{f}(Q^{(l)})$. Second, mix all $\hat{f}(Q^{(l)})$ to form $\hat{f}(Q^{(all)})$. Third, sort total number of $m*J$ draws from $\hat{f}(Q^{(all)})$, where the estimates of 95% posterior interval, posterior median, and other statistics can be obtained from the mixed posterior draws. (citation)
+For Bayesian model, instead of averaging out the estimated regression coefficients, the pooled results are obtained through applying the approach proposed by Zhou and Reiter (2010). For each completed dataset $l = 1,...,m$ and parameter of interest $Q$, denote $Q^{(l)}$ as the MCMC draws from posterior distribution. First, simulate $J$ values of posterior draws (where $J$ is large) from each $Q^{(l)}$, with its distribution denoted as $\hat{f}(Q^{(l)})$. Second, mix all $\hat{f}(Q^{(l)})$ to form $\hat{f}(Q^{(all)})$. Third, sort total number of $m*J$ draws from $\hat{f}(Q^{(all)})$, where the estimates of 95% posterior interval, posterior median, and other statistics can be obtained from the mixed posterior draws. [@BayesianCombined]
 
 The pooled estimated slope, standard error, and 95% credible interval are generated through specifying $J = 4000$ to create a total number of $12*4000 = 48000$ draws. 
 
 |Coefficient | Estimate | Std. Error | 95% CI. | 
-| :--- | :--- | :--- | :--- |       
-|Intercept | -5.753 | 0.77 | [-7.346, -4.322] |
-|OccA | 0.754 | 0.12 |  [0.517,  0.993] |
-|OccC | 0.834 | 0.56 | [-0.374,  1.832] |
-|EducA | -0.760 | 0.19 | [-1.140, -0.403] |
-|EducC | 0.150 | 0.12 | [-0.094,  0.395] |
-|EducD | 0.260 | 0.18 | [-0.092,  0.606] |
-|EducE | -0.028 | 0.21 | [-0.441,  0.376] |
-|Non-Supervisor | -1.045 | 0.11 | [-1.256, -0.829] |
-|Grade0 | -0.703 | 0.24 | [-1.188, -0.249] |
-|Salary | 2.159 | 0.76 |  [0.752,  3.738] |
-|(Salary + 0.5425) | 5.534 | 0.77 |  [4.055,  7.086] |
-|Change1 | -0.358 | 0.16 | [-0.668, -0.062] |
-|Change3 | 0.220 | 0.15 | [-0.088,  0.506] |
-Table: *Combined Coefficient Estimate, Standard Error, and 95% CI. (Bayesian Model)*
+| :--- | :--- | :--- | :--- | 
+|Intercept ($\beta_{0}$) | -6.119 |0.79 | [-7.782, -4.676] |
+|OccA ($\beta_{1}$) | 0.749 | 0.12 | [0.509,  0.993] |
+|OccC ($\beta_{2}$) | 0.890 | 0.57 | [-0.336,  1.902] |
+|EducA ($\beta_{3}$) | -0.721 | 0.19 | [-1.099, -0.355] |
+|EducC ($\beta_{4}$) | 0.127 | 0.13 | [-0.122, 0.375] |
+|EducD ($\beta_{5}$) | 0.187 | 0.18 | [-0.171, 0.539] |
+|EducE ($\beta_{6}$) | -0.048 | 0.21 | [-0.467, 0.358] |
+|Non-Supervisor ($\beta_{7}$) | -0.950 | 0.11 | [-1.166, -0.727] |
+|Grade0 ($\beta_{8}$) | -0.462 | 0.25 | [-0.977, 0.021] |
+|Grade2 ($\beta_{9}$) | 1.398 | 0.22 | [0.973, 1.829] |
+|ScaledSalary ($\beta_{10}$) | 1.955 | 0.77 | [0.572, 3.596] |
+|(ScaledSalary + 1.0751) ($\beta_{11}$) | 2.941 | 0.78 | [1.500, 4.590] |
+|(ScaledSalary - 0.2272) ($\beta_{12}$) | 3.352 | 0.93 | [1.616, 5.252] |
+|Change1 ($\beta_{13}$) | -0.269 | 0.16 | [-0.589, 0.029] |
+|Change3 ($\beta_{14}$) | 0.229 | 0.15 | [-0.081, 0.519] |
+Table: *Combined Coefficient Estimate, Standard Error, and 95% CI. (Frequentist's Model)*
+
 
 ###Comparison between Frequentist and Bayesian Model
+
+[Update Graph]
 
 Figure \@ref(fig:frequentist) and Figure \@ref(fig:bayesian) are used to compare the pooled resulst from Frequentist and Bayesian Model. The estimates of regression coefficients for both models are close to each other, but the pooled standard errors from Bayesian model are higher than those from Frequentist model. The greater uncertainty of Bayesian model, however, does not suggest that Frequentist model is a more ideal model. First, the posterior distribution depends on the prior parameter, and non-informative prior might not be the most ideal prior. Second, in order for pooled Bayesian model to work well, the number of imputed datasets should be large. (citation) Due to computational constraints, only 12 imputed datasets are available
 
@@ -98,12 +105,31 @@ include_graphics(path = "figure/Bayesian.png")
 ```
 
 
-##Inference
+##Inference & Conclusion 
 
-The assumption that a federal employees's gender and race will directly and indirectly influence the promotion decisions for top management positions is proved to be invalid. Furthermore, our prior belief that an employee working at more than one government agencies would be better at building coalitions with various stakeholders is rejected. In general, the selection of the SES positions is highly dependent on (1) personal skills (indicated by variable _Occupational Category_ and _Supervisory Status_) (2) education levels (indicated by variable _Education Group_) (3) performance at work (indicated by variable _Salary_, _Grade_, and _Change_)
+The assumption that a federal employee's gender and race will influence the promotion decisions for top management positions is proven to be invalid. Furthermore, our prior belief that an employee working at various agencies would be better at building coalitions, and therefore more likely to get promoted is rejected. In general, the selection of the SES positions is highly dependent on (1) personal skills (indicated by variable _Occupational Category_ and _Supervisory Status_) (2) education levels (indicated by variable _Education Group_) (3) performance at work (indicated by variable _Salary_, _Grade_, and _Change_)
 
-First, for employees whose occupational category are _Administrative_, the odds of getting promoted are multiplied by a factor of 2.13 (95% CI: 1.68 to 2.7) than employees whose occupational category are _Professional_, holding all else constant. This implies that analytical ability, judgment, discretion, and personal responsibility (characteristics of occupational category _Administrative_) might be more important than having knowledge in a specific field of science (characteristics of occupational category _Professional_). Furthermore, for employees who do not hold supervisory positions, the odds of getting promoted are multipled by a factor of 0.352 (95% CI: 0.285 to 0.436) than employees who hold supervisory positions, holding all else constant. Since leadership is one of the key competencies for the SES positions, employees without leadership expereinces would be put into disadvantages. 
+First, for employees whose occupational category are _Administrative_, the odds of getting promoted are multiplied by a factor of 2.11 (95% CI: 2.038 to 2.184) than employees whose occupational category are _Professional_, holding all else constant. This implies that analytical ability, judgment, discretion, and personal responsibility (characteristics of occupational category _Administrative_) might be more important than having knowledge in a specific field of science (characteristics of occupational category _Professional_). Furthermore, for employees who do not serve in supervisory positions, the odds of getting promoted are multiplied by a factor of 0.387 (95% CI: 0.365 to 0.411) than employees who serve in supervisory positions, holding all else constant. Since leadership is one of the key competencies for the SES positions, employees without leadership experiences would be put into disadvantages. 
 
-Second, education level also plays an important role when it comes to promotion outcome. For employees with degrees below Bachelor's, the odds of getting promoted is multiplied by 0.469 (95% CI: 0.455 to 0.483) compared to employees with Bachelor's degree, holding all else constant. Furthermore, though it is expected that the odds of getting promoted would increase with higher education level, there is certain limit. Specifically, compared to employees with only Bachelor's degrees, the odds of getting promoted increases if employees acquired Master's and Advanced degrees but decreases if employees acquired PhD degrees. This result further confirms that having specific knowledge in a field of science might not be one of the important promotion criteria.
+Second, education level also plays an important role when it comes to promotion outcome. For employees with degrees below Bachelor's, the odds of getting promoted is multiplied by 0.490 (95% CI: 0.473 to 0.508) compared to employees with Bachelor's degree, holding all else constant. Furthermore, though it is expected that the odds of getting promoted would increase with higher education level, there is certain limit. Specifically, compared to employees with only Bachelor's degrees, the odds of getting promoted increases if employees acquired Master's and Advanced degrees but decreases if employees acquired PhD degrees. Since PhD degrees focus on particular fields of studies, this result further confirms that having specific knowledge in a field of science might not be one of the important promotion criteria.
 
-Third, for employees with grade below 13 at workig year 10, the odds of getting promoted are multiplied by a factor of 0.495 (95% CI: 0.305 to 0.78) compared to employees with grade above 13 at working year 10, holding all else constant. This result is generally expected because when it comes to selecting potential candidates for the SES positions, employees with grade above 13 are generally given priority. The visualization graph (Figure ) below further shows the relationship between salary at working year 10 and % change in salary. 
+Third, compared to employees with grade 13 and 14 at working year 10, the odds of getting promoted are multiplied by a factor of 0.636 (95% CI: 0.518 to 0.781) for employees with grade below 13, but multiplied by a factor of 4.023 (95% CI: 3.380 to 4.787) for employees with grade 15. The visualization graphs further show the relationship between salary at given grade and % change in salary. (Grade 15 for Figure \@ref(fig:grade15), Grade 14 for Figure \@ref(fig:grade14), Grade 13 for Figure \@ref(fig:grade13), Grade < 13 for Figure \@ref(fig:less13)) Regardless of Grade, the predicted probability of getting promoted increases as salary increases, and employees with bigger percentage change in salary also have higher odds of getting promoted. Note that the model yields predicted probability up to 0.25 at Grade 15. Given the small proportion of ones, we believe that the predicted probability at grade 15 is potentially overestimated due to sparsity of the data at higher salary values. 
+
+```{r grade15, fig.cap="Grade 15",echo=FALSE}
+include_graphics(path = "figure/Grade15.png")
+```
+
+```{r grade14, fig.cap="Grade 14",echo=FALSE}
+include_graphics(path = "figure/Grade14.png")
+```
+
+```{r grade13, fig.cap="Grade 13",echo=FALSE}
+include_graphics(path = "figure/Grade13.png")
+```
+
+```{r less13, fig.cap="Grade < 13",echo=FALSE}
+include_graphics(path = "figure/less13.png")
+```
+
+
+In conclusion, the model suggests that gender and racial bias does not affect promotion outcome, whereas an employee's personal skills and performance at work are more significant. However, due to sensitivity of imputation results and small proportions of ones in outcome variable, limitations exist for the model.

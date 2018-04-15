@@ -58,13 +58,13 @@ Table: *Career-related Information*
 The underlying goal of this study is to better understand the SES promotion outcomes without political sponsorship. Currently, the SES positions account for less than 1 percent of all positions in the government. With such low proportion, it is important to identify potential candidates before conducting statistical modeling and inference.
 \hfill\break
 
-First, we define our population to be career-track employees whose starting years are between 1978 to 1997 and have at least 15 years of working experiences in the federal government. The reasons to choose this time period are twofold. First, the average number of working year for an employee to get promoted is around 22 years. [@powell1994investigating] 2011 is the last year recorded in the OPM data, so employees who start after 1997 would have less than 15 years of working experiences. Since these people are unlikely to be promoted within such a short period of time, it is appropriate to remove them. Second, the OPM database was not established until 1988, so obtaining information of employees who start in the 1950s or 1960s periods would be challenging. Furthermore, the characteristics of employees in the past are much different from employees nowadays. For example, the attainment of higher education and the proportion of women working are significantly higher nowadays. Given such constraints, we exclude employees whose starting year are before 1978.  
+First, we define our population to be career-track employees (1) whose starting years are between 1978 to 1997 and (2) have at least 15 years of working experiences in the federal government. The reasons to choose this time period are twofold. First, the average number of working year for an employee to get promoted is around 22 years. [@powell1994investigating] Since 2011 is the last year recorded in the OPM data, employees starting after 1997 would have less than 15 years of working experiences and are unlikely to be promoted within such a short period of time. Therefore, it is appropriate to remove them. Second, the OPM database was not established until 1988, so obtaining information of employees starting in the 1950s or 1960s periods would be challenging. Furthermore, the characteristics of employees in the past are much different from employees nowadays. For example, the attainment of higher education and the proportion of women working are significantly higher nowadays. Given such constraints, we exclude employees whose starting year are before 1978.  
 \hfill\break
 
-Second, though it usually takes more than 10 years for a federal employee to get promoted into the SES position, we did recognize that very few employees achieved the SES position with less than 10 years of working experiences. These employees might provide valuable information to the analysis, but we decided to remove them because we are more interested in understanding the long-term career promotion process.  
+Second, though it usually takes more than 10 years for a federal employee to get promoted into the SES position, we did recognize that very few employees achieved the SES position with less than 10 years of working experiences. These employees might provide valuable information to the analysis, but we are more interested in understanding the long-term career promotion. As a result, employees promoted into the SES positions with less than 10 years of working experiences are excluded.
 \hfill\break
 
-Third, we observed that employees who have been promoted into the SES positions usually made significant progress in their mid-career, which can be illustrated by features such as salary and grade achieved at working year 10. As mentioned in the Data section, an employee's grade demonstrates the hierarchical relationships among positions covered by the same pay plan or system. For example, the grades for General Pay Schedule (GS and GM) pay plans range from 1 to 15, with 15 being the highest. Since both pay plans account for approximately 75% of the employees in the data, we can gain some insights from the grade distribution of employees with GS or GM pay plan at working year 10. Specifically, most employees with GS or GM pay plan and were later promoted into the SES position achieved grade 13 and above at working year 10, with few between grade 9 to 12, and none below grade 8. This indicates that employees with GS or GM pay plan who do not achieve grade 9 and above at working year 10 have very limited chance of getting promoted; therefore, we find it suitable to exclude them.  
+Third, we observed that those who got promoted usually made significant progress in their mid-career, which can be illustrated by features such as salary and grade achieved at working year 10. As mentioned in the Data section, an employee's grade demonstrates the hierarchical relationships among positions covered by the same pay plan or system. For example, the grades for General Pay Schedule (GS and GM pay plans) range from 1 to 15, with 15 being the highest grade. Since both pay plans account for approximately 75% of the employees in the data, we can gain some insights from the grade distribution of employees with GS or GM pay plan at working year 10. Specifically, most GS or GM pay plan employees who got promoted achieved grade 13 and above at working year 10, with few between grade 9 to 12, and none below grade 8. This indicates that if GS or GM pay plan employees did not achieve grade 9 and above at working year 10, their chance of getting promoted is limited; therefore, we find it suitable to exclude them.  
 \hfill\break
 
 |**Grade 1-8** | **Grade 9** | **Grade 10**| **Grade 11** | **Grade 12** | **Grade 13** | **Grade 14** | **Grade 15**
@@ -91,34 +91,44 @@ Table: *Occupational Categories*
 
 ##Missing Data
 
-Missing data is common in the social science research due to survey item-nonresponse or data recording errors. Missing data is no exception for the OPM data. Based on the mechanisms of missing data, Rubin defined three types of missing mechanisms: missing completely at random (MCAR), missing at random (MAR), and not missing at random (NMAR). [@little2014statistical]
+###Missing Data Mechanism
+
+Missing data is common in the social science research due to survey item-nonresponse or data recording errors, and it is no exception for the OPM dataset. Based on the mechanisms of missing data, there are three types of missing mechanisms: missing completely at random (MCAR), missing at random (MAR), and not missing at random (NMAR). [@little2014statistical]
 \hfill\break
 
 First, data has MCAR property when the probability of observations being missing is unrelated to other subjects in the study. Second, data has MAR property when the probability of missing only depends on observed values but not on unobserved values. Though there are no formal ways to verify the MAR property, it is usually a reasonable assumption when we do not have comprehensive knowledge of the data. Lastly, data that cannot be attributed to either MCAR or MCAR has NMAR property, where the probability of missing depends on both observed and unobserved values.
 
-##Assessing Missing Data 
+###Assessing Missing Data
 
-To make assumption of the missing mechanisms of the OPM data, it is crucial to understand when and why variables are missing. We achieve this step through examining the nature of the data and the missing patterns of each variable.
+To make assumption of the missing mechanisms of the OPM data, it is crucial to understand when and why variables are missing. We achieve this step through examining the nature of the data and variable missing patterns.
 \hfill\break
 
-The missingness of the OPM data is scattered, and the percentage of missing varies substantially. Given the nature of the data, the missingness can be summarized into two categories. The first category is inherent missingness. The OPM data contain more than 20 years of federal employees' information. As rules and standards change overtime, missing data caused by recording errors is unavoidable. Particularly, this category applies to the missing of Race and Education variables, which are usually independent of time.
+The missingness of the OPM data is scattered, and the percentage of missing varies substantially. Given the nature of the data, the missingness can be summarized into two categories. The first category is inherent missingness. The OPM data contain more than 20 years of federal employees' information. As rules and standards change overtime, missing data caused by recording errors is unavoidable. Particularly, this category applies to the missing of _Race_ and _Education Level_ variables, which are usually independent of time.
 \hfill\break
 
-The second category of the missingness is due to time constraint. The OPM data was not created until 1988, so part of the information for those who started before 1988 would not be recorded. For example, if an employee started in 1980 and worked until 1990, the OPM would only record this employee's information from 1988 to 1990, whereas data from 1980 to 1987 would be missing. The missing of variables such as salary and grade that change overtime belongs to this category. 
+The second category of the missingness is due to time constraint. The OPM data was not created until 1988, so part of the information for those who started before 1988 would not be recorded. For example, if an employee started in 1980 and worked until 1990, the OPM would only record this employee's information from 1988 to 1990, whereas data from 1980 to 1987 would be missing. The missing of variables such as _Salary_ and _Grade_ that change overtime belongs to this category. 
 
 **Inherent Missingness Independent of Time**
 
-The recording of _race_ was originally classified into 16 categories, but new standard established in 2016 simplified it into 6 categories. The change of recording standard therefore leads to missing data. Our strategy to address the _race_ variable is to convert the old recording standard into the new standard. However, even after the conversion, small percentage (less than 0.01%) of the race data is still missing. _Education_ is another variable that has missing data. Some federal employees might pursue higher-level education while working in the government. In the OPM data, around 0.65 percent of the education data is missing. (Figure \@ref(fig:propofmissingfixed)) 
+The recording of _Race_ was originally classified into 16 categories, but new standard established in 2016 simplified it into 6 categories. The change of recording standard would lead to missing data. The main strategy to address the _Race_ variable is to convert the old recording standard into the new standard. However, even after conversion, small percentage (less than 0.01%) of _Race_ variable is still missing. _Education Level_ is another variable that has missing data. (Figure \@ref(fig:fixedmissing)) 
+
+```{r fixedmissing, fig.cap="Inherent Missingness Independent of Time", out.width = "400px",echo=FALSE}
+include_graphics(path = "figure/fixedmissing.png")
+```
 
 **Missingness due to Time Constraint**
 
-_Pay plan_, _grade_, _step rate_, and _salary_ are variables with missing data due to time constraint. Within certain pay plan, an employee's salary information is determined by certain grade and step rate. Since all four variables are related with each other, the percentage of missing data for them should be generally the same overtime. Specifically, the proportion of missingness increases as year decreases. (Figure \@ref(fig:propofmissingnonfixed)) This corresponds to the fact that the earliest recorded year in the OPM data is 1988, but employees who started before 1988 are also included.
+_Pay plan_, _Grade_, _Step Rate_, and _Salary_ are variables with missing data due to time constraint. As mentioned before, an employee's salary information is determined by certain grade, step rate and pay plan. Since all four variables are related with each other, the percentage of missing data for them is generally the same overtime. Specifically, the proportion of missingness increases as year decreases. (Figure \@ref(fig:nonfixedmissing)) This corresponds to the fact that the earliest year recorded in the OPM data is 1988, but employees starting before 1988 are also included.
 \hfill\break
 
-Regardless of time constraint, the missingness of variables is related to the characteristics of observed variables. For example, employees with higher education level are more likely to receive higher starting salary. In other words, the missing salary information is related to the observed education level, confirming that the data are not MCAR. Because no additional information indicates the NMAR property, we should be fairly comfortable to assume MAR for the OPM data.
+```{r nonfixedmissing, fig.cap="Missingness due to Time Constraint", out.width = "400px",echo=FALSE}
+include_graphics(path = "figure/nonfixedmissing.png")
+```
+
+Regardless of time constraint, the missingness of variables is related to the characteristics of observed variables. For example, employees with higher education level are more likely to receive higher starting salary. In other words, the missing salary information is related to observed education level and other variables, confirming that the data are not MCAR. Because no additional information indicates the NMAR property, we should be fairly comfortable to assume MAR for the OPM data.
 \hfill\break
 
-##Addressing Missing Data
+###Addressing Missing Data
 
 The loss of information from missing data would produce bias and impact the robustness of statistical modeling and inference. To address this problem, it is necessary to impute the missing data. In the next section, we would explore various imputation methods and strategies depending on the structure and the nature of the missing data.
 

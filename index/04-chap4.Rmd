@@ -24,7 +24,7 @@ library(thesisdowndss)
 ```
 
 
-# Modeling of Imputed Dataset
+# Exploratory Data Analysis
 
 After checking the robustness of the imputation model, we conduct exploratory data analysis and model fitting based on one imputed dataset. The combined analysis and inference of 12 imputed datasets will be the focus of next chapter.
 
@@ -32,9 +32,7 @@ After checking the robustness of the imputation model, we conduct exploratory da
 
 **Outcome Variable**
 
-The outcome variable of the OPM data is _Promoted_. One denotes an employee was promoted into the SES position after working year 10, and zero denotes otherwise. There are 482 employees promoted into the SES positions out of 34,120 total employees. 
-
-*why we only select GS & GM pay plan
+The outcome variable of the OPM data is _Promoted_. One denotes an employee was promoted into the SES position after working year 10, and zero denotes otherwise. In order for analysis result to be consistent, we only include employees with GS or GM pay plan. There are 482 promoted into the SES positions out of 27,932 total employees.
 
 **Covariates**
 
@@ -57,7 +55,7 @@ To sum up, our analysis approach is to inspect not only fixed variables independ
 
 The number of SES positions is limited in each agency and potential candidates tend to get promoted at different year. This means that the promotion criteria might vary among years. However, given the rarity of the SES positions, one key assumption we have to make is that the covariates selected are general enough to capture the promotion criteria despite time differences. Furthermore, we adjust salary in terms of 2011 inflation rate to make sure variables dependent on time are compared on the same basis.
 
-##Exploratory Data Analysis
+## EDA
 
 To examine the relationship between outcome variable and predictors, we apply two different strategies for categorical and continuous predictors. First, for categorical predictors, we look at the percentages of ones in outcome variable for each level. If a categorical predictor has many levels but the proportion of ones in outcome variable for certain levels is too small, we consider regrouping to reduce levels. Second, for continuous predictor, we first break predictor into $n$ equally sized, ordered groups, and compute the percentage of ones in outcome variable for each group. We then visualize the patterns between groups, and explore the needs for transformation. 
 
@@ -148,7 +146,7 @@ Table: *Supervisory Status*
 
 **Year 10 Grade (Categorical)** 
 
-Variable Year 10 Grade consists of 7 levels - grade 9 - 15. Because the proportion of ones for grade 9 to 12 is relatively small compared to that for grade 13 to 15, year 10 grade is regrouped into two levels - 0 (Year 10 grade 9 to 12), and 1 (Year 10 grade 13 to 15).
+Variable Year 10 Grade consists of 7 levels - grade 9 - 15. The proportion of ones for grade 9 to 12 is small, but increases significantly for grade 13 to 15. It is regrouped into three levels - 0 (Grade 9 - 12), 1 (Grade 13 & 14), and 2 (Grade 15). 
 
 | Year 10 Grade | population (%) | promoted (%) |
 | :--- | :--- | :--- |
@@ -164,7 +162,8 @@ Table: *Year 10 Grade before regrouping*
 | Year 10 Grade | population (%) | promoted (%) |
 | :--- | :--- | :--- |
 | 0 | 66.13 | 0.4 |
-| 1 | 33.87 | 3.97 |
+| 1 | 30.48 | 2.66 |
+| 2 | 3.39 | 15.73 |
 Table: *Year 10 Grade after regrouping*
 
 **Year 10 Salary (Continuous)**
@@ -191,7 +190,7 @@ include_graphics(path = "figure/salary_binned1.png")
 |10 | [93591,149505) | 7.39 |
 Table: *Year 10 Salary Table*
 
-Because the baseline of year 10 grade is determined by grade 13, year 10 salary is centered on the mean salary at grade 13 from OPM's 2011 pay table (the mean is around \$82,425). Year 10 salary is also scaled by \$10,000 for interpretation purpose. Specifically, denote $x_{i}$ as employee $i$'s year 10 salary, $scale(x_{i}) = \dfrac{x_{i} - 82,425}{10,000}$.
+Year 10 salary is centered on the mean salary at grade 13 from OPM's 2011 pay table (the mean is around \$82,425). Year 10 salary is also scaled by \$10,000 for interpretation purpose. Specifically, denote $x_{i}$ as employee $i$'s year 10 salary, $scale(x_{i}) = \dfrac{x_{i} - 82,425}{10,000}$.
 
 **Change in Pay Rate (Categorical)**
 
