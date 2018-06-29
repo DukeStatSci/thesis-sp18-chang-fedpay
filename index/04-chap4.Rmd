@@ -24,44 +24,37 @@ library(thesisdowndss)
 ```
 
 
-# Exploratory Data Analysis
+# Exploratory Data Analysis (EDA)
 
-After checking the robustness of the imputation model, we conduct exploratory data analysis and model fitting based on one imputed dataset. The combined analysis and inference of 12 imputed datasets will be the focus of next chapter.
+After checking the robustness of the imputation model, we conducted exploratory data analysis and model fitting based on one imputed dataset.
 
-##Outcome Variable and Selection of Covariates
+## Outcome variable and covariates selection
 
 **Outcome Variable**
 
-The outcome variable of the OPM data is _Promoted_. One denotes an employee was promoted into the SES position after working year 10, and zero denotes otherwise. In order for analysis result to be consistent, we only include employees with GS or GM pay plan. There are 482 promoted into the SES positions out of 27,932 total employees.
+Variable _Promoted_ is the outcome variable, indicating whether an employee was promoted into the SES position after working year 10 (1 = promoted, 0 = not promoted). In order for the analysis to be consistent, we only included employees with GS or GM pay plan. 482 out of 27,932 employees were promoted.  
 
 **Covariates**
 
-The OPM data consist of detailed information of federal employees, but some are unrelated to the goal of the study. Based on past social science research on the selection of high-level executives within both private and public sectors, we logically choose variables pertaining to our questions of interests as covariates.
+The OPM data contain detailed information about the federal employees, but some variables are unrelated to the goal of the study. Based on past social science research on the selection of high-level executives within both private and public sectors, we logically chose variables relevant to our questions of interests as covariates.  
 
-First, _Gender_ could be a potential predictor since past studies have shown that gender plays an important role in the promotion of high-level executive positions. For example, the glass ceiling phenomenon, the phenomenon that keeps women from reaching the top level of organizations, exists in both public and private sectors. [@powell1994investigating] Second, _Race_ and _Education Level_ are important predictors for federal employees' salary information [@barrientos2017framework], and could possibly impact the promotion process of the SES positions. Therefore, _Race_ and _Education Level_ should be included as covariates.
-\hfill\break
+First, _Gender_ could be a predictor as past studies have shown that gender plays an important role in the promotion of high-level executives. For example, the glass ceiling phenomenon, the phenomenon that keeps women from reaching the top level of organizations, exists in both public and private sectors [@powell1994investigating]. Second, _Race_ and _Education Level_ are important predictors for federal employees' salary information [@barrientos2017framework], and could potentially impact the promotion process. Both variables should be included as covariates.  
 
-Third, employees with the SES position need to build coalitions within and outside the organizations. We can extrapolate that employees who had experiences working in various government agencies might possess this competency. _Department Switch_, an indicator variable of whether an employee switched department between working year 1 to working year 10, could be a critical predictor. Fourth, senior executives need to have the abilities to lead people and make strategic changes. Variables such as _Occupational Category_ and _Supervisory Status_ might provide useful information.
-\hfill\break
+Third, employees with the SES position are required to build coalitions both within and outside the organizations. We extrapolated that employees who had experiences working in various government agencies might possess this competency. _Department Switch_, a variable indicating whether an employee switched department between working year 1 and working year 10, could be a critical predictor. Fourth, senior executives are often tasked to lead people and make strategic changes, and variables such as _Occupational Category_ and _Supervisory Status_ might provide pertinent information.  
 
-Lastly, the selection criteria of the SES position depend on an employee's performance at work. There is a formal appraisal system in the OPM, but such system was not established until 1996. Given the timeframe of our population (employees starting between 1978 and 1997), including this variable is not appropriate. To address this problem, we decide to include _Salary_ and _Grade_ at working year 10 because these variables could potentially indicate an employee's mid-career performance. Furthermore, we create covariate _Change in Pay Rate_, which specifies an employee's rate of change in salary between working year 1 and working year 10. Particularly, employees with higher rate of change in salary would generally indicate better work performance. 
-\hfill\break
-
-To sum up, our analysis approach is to inspect not only fixed variables independent of time such as race, gender, and education levels but also variables indicative of an employee's mid-career performance such as salary and grade achieved at working year 10.
-\hfill\break
-
+Lastly, the promotion criteria depend on an employee's performance at work. There is a formal appraisal system in the OPM, but such system was not established until 1996. Given the timeframe of the studies (employees starting between 1978 and 1997), it is not appropriate to include this variable. To address this problem, we decide to include _Salary_ and _Grade_ at working year 10 because these variables could potentially indicate an employee's mid-career performance. Furthermore, we create an additional covariate _Change in Pay Rate_, which specifies an employee's rate of change in salary between working year 1 and working year 10. Particularly, we posited that higher rate of change in salary would indicate better work performance.  
 
 **Assumptions**
 
-The number of SES positions is limited in each agency and potential candidates tend to get promoted at different year. This means that the promotion criteria might vary among years. However, given the rarity of the SES positions, one key assumption we have to make is that the covariates selected are general enough to capture the promotion criteria despite time differences. Furthermore, we adjust salary in terms of 2011 inflation rate to make sure variables dependent on time are compared on the same basis.
+The number of the SES position is limited in each agency and potential candidates tend to get promoted at different year. Though the promotion criteria might vary among years, we had to make one key assumption given the rarity of the total number of positions. That is, the covariates selected are general enough to capture the promotion criteria despite time differences. Furthermore, we adjusted salary information in terms of 2011 inflation rate to ensure we could compare variables dependent on time on the same basis.  
 
-## EDA
+## Inspection of each covariate
 
-To examine the relationship between outcome variable and predictors, we apply two different strategies for categorical and continuous predictors. First, for categorical predictors, we look at the percentages of ones in outcome variable for each level. If a categorical predictor has many levels but the proportion of ones in outcome variable for certain levels is too small, we consider regrouping to reduce levels. Second, for continuous predictor, we first break predictor into $n$ equally sized, ordered groups, and compute the percentage of ones in outcome variable for each group. We then visualize the patterns between groups, and explore the needs for transformation. 
+We examined the relationship between outcome variable and predictors with two strategies. First, for categorical predictors, we looked at the percentages of ones in outcome variable for each level. If a categorical predictor has many levels but the percentages of ones in outcome variable for certain levels is limited, we considered regrouping to reduce levels. Second, for continuous predictor, we broke predictor into $n$ equally sized, ordered groups, and computed the percentage of ones in outcome variable for each group. We then visualized the patterns between groups and explored the needs for transformation.  
 
 **Gender (Categorical)**
 
-Variable Gender consists of 2 levels - Male and Female (M,F). There are more females than males, but each gender has similar proportion of ones.
+Variable _Gender_ has 2 levels - Male and Female (M,F). There are more females than males, but each gender has similar proportion of ones.
 
 | Gender | population (%) | promoted (%) |
 | :--- | :--- | :--- |
@@ -71,35 +64,35 @@ Table: *Gender*
 
 **Race (Categorical)**
 
-Variable Race consists of 6 levels - Hispanic or Latino (1), American Indian or Alaska Native (2), Asian (3), Black or African American (4), Native Hawaiian or Other Pacific Islander (5), and White (6). Because there are significantly less people with race level 1 - 5 is than people with race level 6, race is regrouped into two levels - Non-white (0), and White (1).
+Variable _Race_ has 6 levels - Hispanic or Latino (1), American Indian or Alaska Native (2), Asian (3), Black or African American (4), Native Hawaiian or Other Pacific Islander (5), and White (6). Because there are significantly less people with race level (1) to (5) than people with race level (6), it is regrouped into two levels - Non-white (0), and White (1).
 
 | Race | population (%) | promoted (%) |
 | :--- | :--- | :--- |
 | Hispanic/Latino (1) | 7.65 | 0.91 |
-| American Indian/Alaska Native (2) | 1.7 | 1.07 |
+| American Indian/Alaska Native (2) | 1.70 | 1.07 |
 | Asian (3) | 4.46 | 0.82 |
 | Black/African American (4) | 12.43 | 1.38 |
 | Native Hawaiian/Other Pacific Islander (5) | 0.05 | 0 |
-| White (6) | 73.7 | 1.79 |
+| White (6) | 73.69 | 1.79 |
 Table: *Race before regrouping*
 
 | Race | population (%) | promoted (%) |
 | :--- | :--- | :--- |
-| Non-white (0) | 26.3 | 1.13 |
-| White (1) | 73.7 | 1.79 |
+| Non-white (0) | 26.30 | 1.13 |
+| White (1) | 73.69 | 1.79 |
 Table: *Race after regrouping*
 
 **Education Level (Categorical)**
 
-Variable Education Level consists of 7 levels - High School Degree or less (0), More than High School, No Bachelor's (1), Bachelor's (2), Master's (3), Professional Degree (4), Advanced Certification (5), and PhD (6). Because certain education levels have relatively small population size, it is regrouped from 7 to 5 levels based on each level's characteristics. Specifically, employees without Bachelor's degree (level 0 and level 1) are combined into one group, and employees with Professional Degree and Advanced Certification (Level 4 and 5) are combined into another group.
+Variable _Education Level_ has 7 levels - High School Degree or less (0), More than High School, No Bachelor's (1), Bachelor's (2), Master's (3), Professional Degree (4), Advanced Certification (5), and PhD (6). Because certain education levels have relatively small population size, it is regrouped from 7 to 5 levels based on each level's characteristics: employees without Bachelor's degree (level (0) and level (1)) are combined into one group, and employees with Professional Degree and Advanced Certification (Level (4) and (5)) are combined into another group.
 
 | Education Level | population (%) | promoted (%) |
 | :--- | :--- | :--- |
-| High School Degree or less (0) | 8.5 | 0.38
+| High School Degree or less (0) | 8.56 | 0.38
 | More than High School, No Bachelor's (1) | 18.57 | 0.59 |
-| Bachelor's (2) | 40.43 | 1.39 |
+| Bachelor's (2) | 40.44 | 1.39 |
 | Master's (3) | 22.33 | 2.31 |
-| Professional Degree (4) | 5.05 | 4.77 |
+| Professional Degree (4) | 5.05 | 4.78 |
 | Advanced Certification (5) | 0.25 | 1.45 |
 | PhD (6) | 4.79 | 3.05 |
 Table: *Education Level before regrouping*
@@ -109,13 +102,13 @@ Table: *Education Level before regrouping*
 | Less than Bachelor's (A) | 27.14 | 0.53
 | Bachelor's (B) | 40.44 | 1.39 |
 | Master's (C) | 22.33 | 2.31 |
-| Professional Degree & Advanced Certification (D) | 5.3 | 4.62 |
+| Professional Degree & Advanced Certification (D) | 5.30 | 4.62 |
 | PhD (E) | 4.79 | 3.05 |
 Table: *Education Level after regrouping*
 
 **Department Switch (Categorical)**
 
-Variable Department Switch indicates whether employees switch department between working year 1 and working year 10. The majority did not switch department, but each group has similar proportion of people promoted into the SES position regardless of department switch.
+Variable _Department Switch_ indicates whether employees switch department between working year 1 and working year 10. The majority did not switch department. Regardless of department switch, each group has similar proportion of people promoted into the SES position.
 
 | Department Switch | population (%) | promoted (%) |
 | :--- | :--- | :--- |
@@ -125,7 +118,7 @@ Table: *Department Switch*
 
 **Occupational Category (Categorical)**
 
-Variable Occupational Category consists of 3 levels - Administrative (A), Professional (P), and Other White Collar (O). For occupational category Other (O), though the population size of this group is small, we do not exclude employees from this occupational category because the number of ones among total population is already small.
+Variable _Occupational Category_ has 3 levels - Administrative (A), Professional (P), and Other White Collar (O).
 
 | Occupational Category | population (%) | promoted (%) |
 | :--- | :--- | :--- |
@@ -136,7 +129,7 @@ Table: *Occupational Category*
 
 **Supervisory Status (Categorical)**
 
-Variable Supervisory Status indicates whether employees hold supervisory position at working year 10. People with supervisory positions have higher proportion of ones than people without supervisory positions. 
+Variable _Supervisory Status_ indicates whether employees hold supervisory position at working year 10. Employees with supervisory positions have higher proportion of ones than people without supervisory positions. 
 
 | Supervisory Status | population (%) | promoted (%) |
 | :--- | :--- | :--- |
@@ -146,7 +139,7 @@ Table: *Supervisory Status*
 
 **Year 10 Grade (Categorical)** 
 
-Variable Year 10 Grade consists of 7 levels - grade 9 - 15. The proportion of ones for grade 9 to 12 is small, but increases significantly for grade 13 to 15. It is regrouped into three levels - 0 (Grade 9 - 12), 1 (Grade 13 & 14), and 2 (Grade 15). 
+Variable _Year 10 Grade_ consists of 7 levels - grade 9 - 15. The proportion of ones for grade 9 to 12 is small, but increases significantly for grade 13 to 15. It is regrouped into three levels - 0 (Grade 9 - 12), 1 (Grade 13 & 14), and 2 (Grade 15). 
 
 | Year 10 Grade | population (%) | promoted (%) |
 | :--- | :--- | :--- |
@@ -168,9 +161,9 @@ Table: *Year 10 Grade after regrouping*
 
 **Year 10 Salary (Continuous)**
 
-Variable Year 10 Salary specifies employees' salary at working year 10. Based on OPM's 2011 General Schedule pay table, employees with grade 9 has minimum salary of 41,563, and employees with grade 15 has maximum salary of 129,517. Due to random noises produced by the imputation model, the imputed datasets consist of grade 9 employees with salary less than 41,563, and grade 15 employees with salary greater than 129,517. Since these outliers account for less than 0.1% of the total observations for each imputed dataset, no concerns on the robustness of the analysis are raised. In addition, combining multiply-imputed datasets to form final analysis could help averaging out the random noises.
+Variable _Year 10 Salary_ specifies employees' salary at working year 10. Based on OPM's 2011 General Schedule pay table, employees with grade 9 has minimum salary of \$41,563, and employees with grade 15 has maximum salary of \$129,517. Due to random noises produced by the imputation model, the imputed datasets consist of grade 9 employees with salary less than 41,563, and grade 15 employees with salary greater than 129,517. Since these outliers account for less than 0.1% of the total observations for each imputed dataset, no concerns on the robustness of the analysis are raised. In addition, combining multiple imputed datasets to form final analysis could help averaging out the random noises.
 
-The visualization graph below is produced based on the strategies mentioned before (Figure \@ref(fig:salarybinned1)). The x-axis denotes 10 equally sized group, with each group represents certain salary ranges. (Year 10 Salary Table). The y-axis denotes the percentage of ones in each group. In general, employees with higher salary have higher percentage of ones. Specifically, group 1 to 8 have percentage of ones less than 2 %, whereas group 9 and 10 have percentage of ones larger than 2 %. The flat curve between group 1 and group 8 and the spike in group 9 and 10 indicate that the relationship between outcome variable and year 10 salary predictor is non-linear. To capture the non-linear relationship, we consider various transformation such as quadratic polynomial transformation. However, we find that the application of semi-parametric piecewise spline function is the most effective in modeling this continuous predictor. The detailed descriptions of spline modeling approach will be mentioned in the next section.
+The visualization graph (Figure \@ref(fig:salarybinned1)) is produced based on the strategy mentioned before. The x-axis denotes 10 equally sized group, with each group representing certain salary ranges. (Year 10 Salary Table). The y-axis denotes the percentage of ones in each group. In general, employees with higher salary have higher percentage of ones. Group 1 to 8 have percentage of ones less than 2 %, whereas group 9 and 10 have percentage of ones larger than 2 %. The flat curve between group 1 and group 8 and the spike in group 9 and 10 indicate that the relationship between outcome variable and year 10 salary predictor is non-linear. To capture the non-linear relationship, we considered various transformation such as quadratic polynomial transformation, and semi-parametric piecewise spline function is the most effective in modeling this continuous predictor. The detailed descriptions of spline modeling will be mentioned in the next section.
 
 ```{r salarybinned1, fig.cap="Year 10 Salary Binned Plot",echo=FALSE}
 include_graphics(path = "figure/salary_binned1.png")
@@ -181,20 +174,20 @@ include_graphics(path = "figure/salary_binned1.png")
 |1 | [25740,47744)  | 0.18 |
 |2 | [47744,52653) | 0.22 |
 |3 | [52653,56801) | 0.18 |
-|4 | [56801,61726) | 0.4 |
+|4 | [56801,61726) | 0.44 |
 |5 | [61726,66339) | 0.66 |
-|6 | [66339,71136) | 0.7 |
+|6 | [66339,71136) | 0.69 |
 |7 | [71136,77180) | 1.3 |
 |8 | [77180,82160) | 1.43 | 
 |9 | [82160,93591) | 3.65 |
 |10 | [93591,149505) | 7.39 |
 Table: *Year 10 Salary Table*
 
-Year 10 salary is centered on the mean salary at grade 13 from OPM's 2011 pay table (the mean is around \$82,425). Year 10 salary is also scaled by \$10,000 for interpretation purpose. Specifically, denote $x_{i}$ as employee $i$'s year 10 salary, $scale(x_{i}) = \dfrac{x_{i} - 82,425}{10,000}$.
+Note that we recentered and rescaled the year 10 salary for interpretation purpose. First, year 10 salary is centered on the mean salary at grade 13 from OPM's 2011 pay table (the mean is around \$82,425). Second, it is also scaled by \$10,000. Denote $x_{i}$ as employee $i$'s year 10 salary, $scale(x_{i}) = \dfrac{x_{i} - 82,425}{10,000}$.
 
 **Change in Pay Rate (Categorical)**
 
-Variable Change in Pay Rate specifies the percentage change in salary between working year 1 and working year 10. The construction of the visualization graph for change in pay rate is similar to that for year 10 salary. (Figure \@ref(fig:changebinned)) The x-axis denotes 10 equally sized group, with each group represents certain change in pay rate. (Change in Pay Rate Table). The y-axis denotes the percentage of ones in each group. Though we believe that higher percentage of change in salary might indicate better performance at work, it is not reflected in the promotion of the SES position. Regardless of change rate, the graph does not indicate particular trend since the proportion of ones fluctuates among groups. This means that Change in Pay Rate probably doesn't provide predictive power if treated as continuous variable. 
+Variable _Change in Pay Rate_ specifies the change in pay rate between working year 1 and working year 10. The construction of the visualization graph for change in pay rate (Figure \@ref(fig:changebinned)) is similar to that for year 10 salary. The x-axis denotes 10 equally sized group, with each group representing certain change in pay rate (Change in Pay Rate Table). The y-axis denotes the percentage of ones in each group. Though we believe that higher percentage of change in salary might indicate better performance at work, it is not reflected in the promotion of the SES position. Regardless of change rate, the graph does not indicate particular trend as the proportion of ones fluctuates among groups. This means that _Change in Pay Rate_ probably does not provide predictive power if treated as continuous variable. 
 
 ```{r changebinned, fig.cap="Change in Pay Rate Binned Plot",echo=FALSE}
 include_graphics(path = "figure/change_binned.png")
@@ -221,4 +214,4 @@ Table: *Year 10 Pay Rate Change before regrouping*
 |Change3 | 160+ | 2.66 |
 Table: *Year 10 Pay Rate Change after regrouping*
 
-To address the problem, we decide to model pay rate as a categorical variable with 3 levels. The first level consists of employees with rate changes below 62% (equals to around 5% change per year). This pay rate change range falls within the regular rate change of the federal government. The second level consists of employees with rate change between 62% and 160% (equals to around 5 - 10% change per year). This rate change range is higher than the regular rate change, indicating that employees with this rate change level might perform better than employees with regular rate change level. The third level consists of employees with rate changes above 160%. This rate change is significantly higher than the regular change rate. However, some of the very high rate change values are sensitive to the imputation models since more than 80% of the rate change data is missing.  
+To address the problem, we decide to model pay rate as a categorical variable with 3 levels. The first level consists of employees with rate changes below 62% (equals to around 5% change per year). This pay rate change range falls within the regular rate change of the federal government. The second level consists of employees with rate change between 62% and 160% (equals to around 5 - 10% change per year). This rate change range is higher than the regular rate change, indicating that employees with this rate change level might perform better than employees with regular rate change. The third level consists of employees with rate changes above 160%. This rate change is significantly higher than the regular change rate. Note that some of the very high rate change values are sensitive to the imputation models since more than 80% of the rate change data is missing. 

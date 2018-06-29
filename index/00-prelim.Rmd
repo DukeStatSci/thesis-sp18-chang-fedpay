@@ -3,19 +3,7 @@ output:
   pdf_document: default
   html_document: default
 ---
-# Preliminary Content {-}
 
-## Acknowledgements {-}
+# Abstract {.unnumbered}
 
-I want to thank a few people.
-
-## Preface {-}
-
-This is an example of a thesis setup to use the reed thesis document class
-(for LaTeX) and the R bookdown package, in general.
-
-## Dedication {-}
-
-You can have a dedication here if you wish. 
-
-`r if(!knitr:::is_latex_output()) '## Abstract {-}'`
+The Senior Executive Service (SES) is a key leadership position within the Federal government. Federal employee with the SES position serves as the primary link between top political appointees and the rest of the Federal workforce. This study aims to understand factors that impact the SES promotion outcome, where we built a predictive model to predict promotion based on federal employees' personal and career information. Due to recording error and time constraints, multiple variables have missing data, with some over 80% missing. To address potential data analysis challenges, we adopted multiple imputation technique to impute missing data. First, we generated 12 completed datasets through multivariate imputation by chained equations, with Classification and Regression Tree specified as the conditional distribution. Predictive check was then used to assess the robustness of imputation results. Second, we experimented various statistical models based on one completed dataset, where piecewise linear regression model provided appropriate fit to the data. Lastly, we estimated model coefficients with two approaches - maximum likelihood estimates and Bayesian posterior distribution. We then combined each completed dataset's coefficient estimates to conduct inference.  

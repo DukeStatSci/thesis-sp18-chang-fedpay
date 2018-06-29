@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Modeling Federal Employees Data to Predict Promotion</title>
+  <meta name="description" content="Modeling Federal Employees Data to Predict Promotion">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Modeling Federal Employees Data to Predict Promotion" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Modeling Federal Employees Data to Predict Promotion" />
+  
+  
+  
+
+<meta name="author" content="Chia-Rui (Jerry) Chang">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="3-missing-data-multiple-imputation.html">
+<link rel="next" href="5-model-fitting.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"></a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="abstract.html"><a href="abstract.html"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="1" data-path="1-introduction.html"><a href="1-introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="2-data.html"><a href="2-data.html"><i class="fa fa-check"></i><b>2</b> Data</a></li>
+<li class="chapter" data-level="3" data-path="3-missing-data-multiple-imputation.html"><a href="3-missing-data-multiple-imputation.html"><i class="fa fa-check"></i><b>3</b> Missing Data &amp; Multiple Imputation</a><ul>
+<li class="chapter" data-level="3.1" data-path="3-missing-data-multiple-imputation.html"><a href="3-missing-data-multiple-imputation.html#missing-data"><i class="fa fa-check"></i><b>3.1</b> Missing data</a></li>
+<li class="chapter" data-level="3.2" data-path="3-missing-data-multiple-imputation.html"><a href="3-missing-data-multiple-imputation.html#overview-of-multiple-imputation"><i class="fa fa-check"></i><b>3.2</b> Overview of Multiple Imputation</a></li>
+<li class="chapter" data-level="3.3" data-path="3-missing-data-multiple-imputation.html"><a href="3-missing-data-multiple-imputation.html#specifying-predictive-conditional-distribution---the-cart-method"><i class="fa fa-check"></i><b>3.3</b> Specifying predictive conditional distribution - the CART method</a></li>
+<li class="chapter" data-level="3.4" data-path="3-missing-data-multiple-imputation.html"><a href="3-missing-data-multiple-imputation.html#improving-computational-efficiency"><i class="fa fa-check"></i><b>3.4</b> Improving computational efficiency</a></li>
+<li class="chapter" data-level="3.5" data-path="3-missing-data-multiple-imputation.html"><a href="3-missing-data-multiple-imputation.html#imputation-results-and-predictive-checks"><i class="fa fa-check"></i><b>3.5</b> Imputation results and predictive checks</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-exploratory-data-analysis-eda.html"><a href="4-exploratory-data-analysis-eda.html"><i class="fa fa-check"></i><b>4</b> Exploratory Data Analysis (EDA)</a><ul>
+<li class="chapter" data-level="4.1" data-path="4-exploratory-data-analysis-eda.html"><a href="4-exploratory-data-analysis-eda.html#outcome-variable-and-covariates-selection"><i class="fa fa-check"></i><b>4.1</b> Outcome variable and covariates selection</a></li>
+<li class="chapter" data-level="4.2" data-path="4-exploratory-data-analysis-eda.html"><a href="4-exploratory-data-analysis-eda.html#inspection-of-each-covariate"><i class="fa fa-check"></i><b>4.2</b> Inspection of each covariate</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-model-fitting.html"><a href="5-model-fitting.html"><i class="fa fa-check"></i><b>5</b> Model Fitting</a><ul>
+<li class="chapter" data-level="5.1" data-path="5-model-fitting.html"><a href="5-model-fitting.html#logistic-regression-with-piecewise-linear-spline-application"><i class="fa fa-check"></i><b>5.1</b> Logistic regression with piecewise linear spline application</a></li>
+<li class="chapter" data-level="5.2" data-path="5-model-fitting.html"><a href="5-model-fitting.html#baseline"><i class="fa fa-check"></i><b>5.2</b> Baseline</a></li>
+<li class="chapter" data-level="5.3" data-path="5-model-fitting.html"><a href="5-model-fitting.html#model-form"><i class="fa fa-check"></i><b>5.3</b> Model Form</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html"><i class="fa fa-check"></i><b>6</b> Pooled Analysis</a><ul>
+<li class="chapter" data-level="6.1" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#estimates-of-model-coefficients"><i class="fa fa-check"></i><b>6.1</b> Estimates of model coefficients</a></li>
+<li class="chapter" data-level="6.2" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#pooled-results"><i class="fa fa-check"></i><b>6.2</b> Pooled results</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#frequentist-model"><i class="fa fa-check"></i><b>6.2.1</b> Frequentist model</a></li>
+<li class="chapter" data-level="6.2.2" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#bayesian-model"><i class="fa fa-check"></i><b>6.2.2</b> Bayesian Model</a></li>
+<li class="chapter" data-level="6.2.3" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#comparison-between-frequentist-and-bayesian-model"><i class="fa fa-check"></i><b>6.2.3</b> Comparison between Frequentist and Bayesian Model</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#inference-based-on-frequentist-model"><i class="fa fa-check"></i><b>6.3</b> Inference based on Frequentist model</a></li>
+<li class="chapter" data-level="6.4" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#conclusion-and-future-improvement"><i class="fa fa-check"></i><b>6.4</b> Conclusion and future improvement</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modeling Federal Employees Data to Predict Promotion</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="exploratory-data-analysis-eda" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Exploratory Data Analysis (EDA)</h1>
+<p>After checking the robustness of the imputation model, we conducted exploratory data analysis and model fitting based on one imputed dataset.</p>
+<div id="outcome-variable-and-covariates-selection" class="section level2">
+<h2><span class="header-section-number">4.1</span> Outcome variable and covariates selection</h2>
+<p><strong>Outcome Variable</strong></p>
+<p>Variable <em>Promoted</em> is the outcome variable, indicating whether an employee was promoted into the SES position after working year 10 (1 = promoted, 0 = not promoted). In order for the analysis to be consistent, we only included employees with GS or GM pay plan. 482 out of 27,932 employees were promoted.</p>
+<p><strong>Covariates</strong></p>
+<p>The OPM data contain detailed information about the federal employees, but some variables are unrelated to the goal of the study. Based on past social science research on the selection of high-level executives within both private and public sectors, we logically chose variables relevant to our questions of interests as covariates.</p>
+<p>First, <em>Gender</em> could be a predictor as past studies have shown that gender plays an important role in the promotion of high-level executives. For example, the glass ceiling phenomenon, the phenomenon that keeps women from reaching the top level of organizations, exists in both public and private sectors <span class="citation">(Powell &amp; Butterfield, 1994)</span>. Second, <em>Race</em> and <em>Education Level</em> are important predictors for federal employees’ salary information <span class="citation">(Barrientos et al., 2017)</span>, and could potentially impact the promotion process. Both variables should be included as covariates.</p>
+<p>Third, employees with the SES position are required to build coalitions both within and outside the organizations. We extrapolated that employees who had experiences working in various government agencies might possess this competency. <em>Department Switch</em>, a variable indicating whether an employee switched department between working year 1 and working year 10, could be a critical predictor. Fourth, senior executives are often tasked to lead people and make strategic changes, and variables such as <em>Occupational Category</em> and <em>Supervisory Status</em> might provide pertinent information.</p>
+<p>Lastly, the promotion criteria depend on an employee’s performance at work. There is a formal appraisal system in the OPM, but such system was not established until 1996. Given the timeframe of the studies (employees starting between 1978 and 1997), it is not appropriate to include this variable. To address this problem, we decide to include <em>Salary</em> and <em>Grade</em> at working year 10 because these variables could potentially indicate an employee’s mid-career performance. Furthermore, we create an additional covariate <em>Change in Pay Rate</em>, which specifies an employee’s rate of change in salary between working year 1 and working year 10. Particularly, we posited that higher rate of change in salary would indicate better work performance.</p>
+<p><strong>Assumptions</strong></p>
+<p>The number of the SES position is limited in each agency and potential candidates tend to get promoted at different year. Though the promotion criteria might vary among years, we had to make one key assumption given the rarity of the total number of positions. That is, the covariates selected are general enough to capture the promotion criteria despite time differences. Furthermore, we adjusted salary information in terms of 2011 inflation rate to ensure we could compare variables dependent on time on the same basis.</p>
+</div>
+<div id="inspection-of-each-covariate" class="section level2">
+<h2><span class="header-section-number">4.2</span> Inspection of each covariate</h2>
+<p>We examined the relationship between outcome variable and predictors with two strategies. First, for categorical predictors, we looked at the percentages of ones in outcome variable for each level. If a categorical predictor has many levels but the percentages of ones in outcome variable for certain levels is limited, we considered regrouping to reduce levels. Second, for continuous predictor, we broke predictor into <span class="math inline">\(n\)</span> equally sized, ordered groups, and computed the percentage of ones in outcome variable for each group. We then visualized the patterns between groups and explored the needs for transformation.</p>
+<p><strong>Gender (Categorical)</strong></p>
+<p>Variable <em>Gender</em> has 2 levels - Male and Female (M,F). There are more females than males, but each gender has similar proportion of ones.</p>
+<table>
+<caption><em>Gender</em></caption>
+<thead>
+<tr class="header">
+<th align="left">Gender</th>
+<th align="left">population (%)</th>
+<th align="left">promoted (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Male (M)</td>
+<td align="left">39.62</td>
+<td align="left">1.39</td>
+</tr>
+<tr class="even">
+<td align="left">Female (F)</td>
+<td align="left">60.38</td>
+<td align="left">1.76</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Race (Categorical)</strong></p>
+<p>Variable <em>Race</em> has 6 levels - Hispanic or Latino (1), American Indian or Alaska Native (2), Asian (3), Black or African American (4), Native Hawaiian or Other Pacific Islander (5), and White (6). Because there are significantly less people with race level (1) to (5) than people with race level (6), it is regrouped into two levels - Non-white (0), and White (1).</p>
+<table>
+<caption><em>Race before regrouping</em></caption>
+<thead>
+<tr class="header">
+<th align="left">Race</th>
+<th align="left">population (%)</th>
+<th align="left">promoted (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Hispanic/Latino (1)</td>
+<td align="left">7.65</td>
+<td align="left">0.91</td>
+</tr>
+<tr class="even">
+<td align="left">American Indian/Alaska Native (2)</td>
+<td align="left">1.70</td>
+<td align="left">1.07</td>
+</tr>
+<tr class="odd">
+<td align="left">Asian (3)</td>
+<td align="left">4.46</td>
+<td align="left">0.82</td>
+</tr>
+<tr class="even">
+<td align="left">Black/African American (4)</td>
+<td align="left">12.43</td>
+<td align="left">1.38</td>
+</tr>
+<tr class="odd">
+<td align="left">Native Hawaiian/Other Pacific Islander (5)</td>
+<td align="left">0.05</td>
+<td align="left">0</td>
+</tr>
+<tr class="even">
+<td align="left">White (6)</td>
+<td align="left">73.69</td>
+<td align="left">1.79</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><em>Race after regrouping</em></caption>
+<thead>
+<tr class="header">
+<th align="left">Race</th>
+<th align="left">population (%)</th>
+<th align="left">promoted (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Non-white (0)</td>
+<td align="left">26.30</td>
+<td align="left">1.13</td>
+</tr>
+<tr class="even">
+<td align="left">White (1)</td>
+<td align="left">73.69</td>
+<td align="left">1.79</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Education Level (Categorical)</strong></p>
+<p>Variable <em>Education Level</em> has 7 levels - High School Degree or less (0), More than High School, No Bachelor’s (1), Bachelor’s (2), Master’s (3), Professional Degree (4), Advanced Certification (5), and PhD (6). Because certain education levels have relatively small population size, it is regrouped from 7 to 5 levels based on each level’s characteristics: employees without Bachelor’s degree (level (0) and level (1)) are combined into one group, and employees with Professional Degree and Advanced Certification (Level (4) and (5)) are combined into another group.</p>
+<table>
+<caption><em>Education Level before regrouping</em></caption>
+<thead>
+<tr class="header">
+<th align="left">Education Level</th>
+<th align="left">population (%)</th>
+<th align="left">promoted (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">High School Degree or less (0)</td>
+<td align="left">8.56</td>
+<td align="left">0.38</td>
+</tr>
+<tr class="even">
+<td align="left">More than High School, No Bachelor’s (1)</td>
+<td align="left">18.57</td>
+<td align="left">0.59</td>
+</tr>
+<tr class="odd">
+<td align="left">Bachelor’s (2)</td>
+<td align="left">40.44</td>
+<td align="left">1.39</td>
+</tr>
+<tr class="even">
+<td align="left">Master’s (3)</td>
+<td align="left">22.33</td>
+<td align="left">2.31</td>
+</tr>
+<tr class="odd">
+<td align="left">Professional Degree (4)</td>
+<td align="left">5.05</td>
+<td align="left">4.78</td>
+</tr>
+<tr class="even">
+<td align="left">Advanced Certification (5)</td>
+<td align="left">0.25</td>
+<td align="left">1.45</td>
+</tr>
+<tr class="odd">
+<td align="left">PhD (6)</td>
+<td align="left">4.79</td>
+<td align="left">3.05</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><em>Education Level after regrouping</em></caption>
+<thead>
+<tr class="header">
+<th align="left">Education Level</th>
+<th align="left">population (%)</th>
+<th align="left">promoted (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Less than Bachelor’s (A)</td>
+<td align="left">27.14</td>
+<td align="left">0.53</td>
+</tr>
+<tr class="even">
+<td align="left">Bachelor’s (B)</td>
+<td align="left">40.44</td>
+<td align="left">1.39</td>
+</tr>
+<tr class="odd">
+<td align="left">Master’s (C)</td>
+<td align="left">22.33</td>
+<td align="left">2.31</td>
+</tr>
+<tr class="even">
+<td align="left">Professional Degree &amp; Advanced Certification (D)</td>
+<td align="left">5.30</td>
+<td align="left">4.62</td>
+</tr>
+<tr class="odd">
+<td align="left">PhD (E)</td>
+<td align="left">4.79</td>
+<td align="left">3.05</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Department Switch (Categorical)</strong></p>
+<p>Variable <em>Department Switch</em> indicates whether employees switch department between working year 1 and working year 10. The majority did not switch department. Regardless of department switch, each group has similar proportion of people promoted into the SES position.</p>
+<table>
+<caption><em>Department Switch</em></caption>
+<thead>
+<tr class="header">
+<th align="left">Department Switch</th>
+<th align="left">population (%)</th>
+<th align="left">promoted (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">No Switch</td>
+<td align="left">91.17</td>
+<td align="left">1.6</td>
+</tr>
+<tr class="even">
+<td align="left">Switch</td>
+<td align="left">8.83</td>
+<td align="left">1.7</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Occupational Category (Categorical)</strong></p>
+<p>Variable <em>Occupational Category</em> has 3 levels - Administrative (A), Professional (P), and Other White Collar (O).</p>
+<table>
+<caption><em>Occupational Category</em></caption>
+<thead>
+<tr class="header">
+<th align="left">Occupational Category</th>
+<th align="left">population (%)</th>
+<th align="left">promoted (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Administrative (A)</td>
+<td align="left">58.06</td>
+<td align="left">1.71</td>
+</tr>
+<tr class="even">
+<td align="left">Professional (P)</td>
+<td align="left">38.97</td>
+<td align="left">1.56</td>
+</tr>
+<tr class="odd">
+<td align="left">Other (O)</td>
+<td align="left">2.97</td>
+<td align="left">0.49</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Supervisory Status (Categorical)</strong></p>
+<p>Variable <em>Supervisory Status</em> indicates whether employees hold supervisory position at working year 10. Employees with supervisory positions have higher proportion of ones than people without supervisory positions.</p>
+<table>
+<caption><em>Supervisory Status</em></caption>
+<thead>
+<tr class="header">
+<th align="left">Supervisory Status</th>
+<th align="left">population (%)</th>
+<th align="left">promoted (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Supervisor</td>
+<td align="left">14.34</td>
+<td align="left">5.69</td>
+</tr>
+<tr class="even">
+<td align="left">Non-supervisor</td>
+<td align="left">85.66</td>
+<td align="left">0.93</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Year 10 Grade (Categorical)</strong></p>
+<p>Variable <em>Year 10 Grade</em> consists of 7 levels - grade 9 - 15. The proportion of ones for grade 9 to 12 is small, but increases significantly for grade 13 to 15. It is regrouped into three levels - 0 (Grade 9 - 12), 1 (Grade 13 &amp; 14), and 2 (Grade 15).</p>
+<table>
+<caption><em>Year 10 Grade before regrouping</em></caption>
+<thead>
+<tr class="header">
+<th align="left">Year 10 Grade</th>
+<th align="left">population (%)</th>
+<th align="left">promoted (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">16.46</td>
+<td align="left">0.11</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="left">2.44</td>
+<td align="left">0.30</td>
+</tr>
+<tr class="odd">
+<td align="left">11</td>
+<td align="left">22.88</td>
+<td align="left">0.26</td>
+</tr>
+<tr class="even">
+<td align="left">12</td>
+<td align="left">24.35</td>
+<td align="left">0.75</td>
+</tr>
+<tr class="odd">
+<td align="left">13</td>
+<td align="left">20.81</td>
+<td align="left">1.69</td>
+</tr>
+<tr class="even">
+<td align="left">14</td>
+<td align="left">9.66</td>
+<td align="left">4.77</td>
+</tr>
+<tr class="odd">
+<td align="left">15</td>
+<td align="left">3.39</td>
+<td align="left">15.73</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><em>Year 10 Grade after regrouping</em></caption>
+<thead>
+<tr class="header">
+<th align="left">Year 10 Grade</th>
+<th align="left">population (%)</th>
+<th align="left">promoted (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0</td>
+<td align="left">66.13</td>
+<td align="left">0.4</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">30.48</td>
+<td align="left">2.66</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">3.39</td>
+<td align="left">15.73</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Year 10 Salary (Continuous)</strong></p>
+<p>Variable <em>Year 10 Salary</em> specifies employees’ salary at working year 10. Based on OPM’s 2011 General Schedule pay table, employees with grade 9 has minimum salary of $41,563, and employees with grade 15 has maximum salary of $129,517. Due to random noises produced by the imputation model, the imputed datasets consist of grade 9 employees with salary less than 41,563, and grade 15 employees with salary greater than 129,517. Since these outliers account for less than 0.1% of the total observations for each imputed dataset, no concerns on the robustness of the analysis are raised. In addition, combining multiple imputed datasets to form final analysis could help averaging out the random noises.</p>
+<p>The visualization graph (Figure <a href="4-exploratory-data-analysis-eda.html#fig:salarybinned1">4.1</a>) is produced based on the strategy mentioned before. The x-axis denotes 10 equally sized group, with each group representing certain salary ranges. (Year 10 Salary Table). The y-axis denotes the percentage of ones in each group. In general, employees with higher salary have higher percentage of ones. Group 1 to 8 have percentage of ones less than 2 %, whereas group 9 and 10 have percentage of ones larger than 2 %. The flat curve between group 1 and group 8 and the spike in group 9 and 10 indicate that the relationship between outcome variable and year 10 salary predictor is non-linear. To capture the non-linear relationship, we considered various transformation such as quadratic polynomial transformation, and semi-parametric piecewise spline function is the most effective in modeling this continuous predictor. The detailed descriptions of spline modeling will be mentioned in the next section.</p>
+<div class="figure" style="text-align: center"><span id="fig:salarybinned1"></span>
+<img src="figure/salary_binned1.png" alt="Year 10 Salary Binned Plot"  />
+<p class="caption">
+Figure 4.1: Year 10 Salary Binned Plot
+</p>
+</div>
+<table>
+<caption><em>Year 10 Salary Table</em></caption>
+<thead>
+<tr class="header">
+<th align="left">Group</th>
+<th align="left">Salary Range</th>
+<th align="left">% promoted</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">[25740,47744)</td>
+<td align="left">0.18</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">[47744,52653)</td>
+<td align="left">0.22</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">[52653,56801)</td>
+<td align="left">0.18</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">[56801,61726)</td>
+<td align="left">0.44</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">[61726,66339)</td>
+<td align="left">0.66</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">[66339,71136)</td>
+<td align="left">0.69</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">[71136,77180)</td>
+<td align="left">1.3</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="left">[77180,82160)</td>
+<td align="left">1.43</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">[82160,93591)</td>
+<td align="left">3.65</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="left">[93591,149505)</td>
+<td align="left">7.39</td>
+</tr>
+</tbody>
+</table>
+<p>Note that we recentered and rescaled the year 10 salary for interpretation purpose. First, year 10 salary is centered on the mean salary at grade 13 from OPM’s 2011 pay table (the mean is around $82,425). Second, it is also scaled by $10,000. Denote <span class="math inline">\(x_{i}\)</span> as employee <span class="math inline">\(i\)</span>’s year 10 salary, <span class="math inline">\(scale(x_{i}) = \dfrac{x_{i} - 82,425}{10,000}\)</span>.</p>
+<p><strong>Change in Pay Rate (Categorical)</strong></p>
+<p>Variable <em>Change in Pay Rate</em> specifies the change in pay rate between working year 1 and working year 10. The construction of the visualization graph for change in pay rate (Figure <a href="4-exploratory-data-analysis-eda.html#fig:changebinned">4.2</a>) is similar to that for year 10 salary. The x-axis denotes 10 equally sized group, with each group representing certain change in pay rate (Change in Pay Rate Table). The y-axis denotes the percentage of ones in each group. Though we believe that higher percentage of change in salary might indicate better performance at work, it is not reflected in the promotion of the SES position. Regardless of change rate, the graph does not indicate particular trend as the proportion of ones fluctuates among groups. This means that <em>Change in Pay Rate</em> probably does not provide predictive power if treated as continuous variable.</p>
+<div class="figure" style="text-align: center"><span id="fig:changebinned"></span>
+<img src="figure/change_binned.png" alt="Change in Pay Rate Binned Plot"  />
+<p class="caption">
+Figure 4.2: Change in Pay Rate Binned Plot
+</p>
+</div>
+<table>
+<caption><em>Year 10 Pay Rate Change before regrouping</em></caption>
+<thead>
+<tr class="header">
+<th align="left">Group</th>
+<th align="left">% Change Range</th>
+<th align="left">% promoted</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">[-10.3,40.4)</td>
+<td align="left">1.39</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">[40.4,57.2)</td>
+<td align="left">1.79</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">[57.2,69.8)</td>
+<td align="left">1.24</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">[69.8,81.1)</td>
+<td align="left">0.10</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">[81.1,92.5)</td>
+<td align="left">1.35</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">[92.5,105.5)</td>
+<td align="left">1.39</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">[105.5,120.5)</td>
+<td align="left">1.57</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="left">[120.5,140.7)</td>
+<td align="left">1.83</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">[140.7,174.8)</td>
+<td align="left">1.87</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="left">174.8+</td>
+<td align="left">2.71</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><em>Year 10 Pay Rate Change after regrouping</em></caption>
+<thead>
+<tr class="header">
+<th align="left">Group</th>
+<th align="left">% Change Range</th>
+<th align="left">promoted (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Change1</td>
+<td align="left">[-10.34,62)</td>
+<td align="left">1.51</td>
+</tr>
+<tr class="even">
+<td align="left">Change2</td>
+<td align="left">[62,160)</td>
+<td align="left">1.42</td>
+</tr>
+<tr class="odd">
+<td align="left">Change3</td>
+<td align="left">160+</td>
+<td align="left">2.66</td>
+</tr>
+</tbody>
+</table>
+<p>To address the problem, we decide to model pay rate as a categorical variable with 3 levels. The first level consists of employees with rate changes below 62% (equals to around 5% change per year). This pay rate change range falls within the regular rate change of the federal government. The second level consists of employees with rate change between 62% and 160% (equals to around 5 - 10% change per year). This rate change range is higher than the regular rate change, indicating that employees with this rate change level might perform better than employees with regular rate change. The third level consists of employees with rate changes above 160%. This rate change is significantly higher than the regular change rate. Note that some of the very high rate change values are sensitive to the imputation models since more than 80% of the rate change data is missing.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="3-missing-data-multiple-imputation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="5-model-fitting.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": [["thesis.pdf", "PDF"], ["thesis.epub", "EPUB"], ["thesis.docx", "Word"]],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
