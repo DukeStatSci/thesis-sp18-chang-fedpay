@@ -63,7 +63,7 @@
 <ul class="summary">
 <li><a href="./"></a></li>
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="abstract.html"><a href="abstract.html"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Abstract</a></li>
 <li class="chapter" data-level="1" data-path="1-introduction.html"><a href="1-introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="2-data.html"><a href="2-data.html"><i class="fa fa-check"></i><b>2</b> Data</a></li>
 <li class="chapter" data-level="3" data-path="3-missing-data-multiple-imputation.html"><a href="3-missing-data-multiple-imputation.html"><i class="fa fa-check"></i><b>3</b> Missing Data &amp; Multiple Imputation</a><ul>
@@ -605,7 +605,7 @@ Figure 6.7: Grade &lt; 13
 </div>
 <div id="conclusion-and-future-improvement" class="section level2">
 <h2><span class="header-section-number">6.4</span> Conclusion and future improvement</h2>
-<p>In conclusion, the model suggests an employee’s personal skills and performance at work are significant in predicting promotion outcomes, but certain limitations exist for the model. First, the analysis is currently based on 10% samples of the OPM database, and we would like to apply our current model on the data with full samples to test its predictive accuracy. Second, the predictive probability of employees with very high salary values is overestimated. This might due to the fact that the piecewise linear model is not granular enough to account for small proportion of ones in outcome variables. In the future, we would like to experiment on various semi-parametric and parametric models. Third, we did not have enough imputed datasets to account for random noises produced by the imputation models. This also affected the validity of the Bayesian inference after multiple imputation. In the future, we would like to expand the current computational capacity in order to impute more completed datasets.</p>
+<p>In conclusion, the model suggests an employee’s personal skills and performance at work are significant in predicting promotion outcomes, but certain limitations exist for the model. First, the analysis is based on 10% samples of the OPM data, and we would like to apply the current model to the full samples. Second, the predictive probability of employees with very high salary values is potentially overestimated because the piecewise linear model is not granular enough to account for small proportion of ones in outcome variables. In the future, we would like to experiment on various models to improve the predictive accuracy. Third, we did not have enough imputed datasets to account for random noises produced by the imputation models. This also affected the validity of the Bayesian inference after multiple imputation. In the future, we would like to impute more completed datasets through expanding computational capacity.</p>
 
 <!--
 The bib chunk below must go last in this document according to how R Markdown renders.  More info is at http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html
