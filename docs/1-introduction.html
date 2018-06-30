@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Modeling Federal Employees Data to Predict Promotion</title>
+  <meta name="description" content="Modeling Federal Employees Data to Predict Promotion">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Modeling Federal Employees Data to Predict Promotion" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Modeling Federal Employees Data to Predict Promotion" />
+  
+  
+  
+
+<meta name="author" content="Chia-Rui (Jerry) Chang">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="2-data.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"></a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="1" data-path="1-introduction.html"><a href="1-introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="2-data.html"><a href="2-data.html"><i class="fa fa-check"></i><b>2</b> Data</a></li>
+<li class="chapter" data-level="3" data-path="3-missing-data-multiple-imputation.html"><a href="3-missing-data-multiple-imputation.html"><i class="fa fa-check"></i><b>3</b> Missing Data &amp; Multiple Imputation</a><ul>
+<li class="chapter" data-level="3.1" data-path="3-missing-data-multiple-imputation.html"><a href="3-missing-data-multiple-imputation.html#missing-data"><i class="fa fa-check"></i><b>3.1</b> Missing data</a></li>
+<li class="chapter" data-level="3.2" data-path="3-missing-data-multiple-imputation.html"><a href="3-missing-data-multiple-imputation.html#overview-of-multiple-imputation"><i class="fa fa-check"></i><b>3.2</b> Overview of Multiple Imputation</a></li>
+<li class="chapter" data-level="3.3" data-path="3-missing-data-multiple-imputation.html"><a href="3-missing-data-multiple-imputation.html#specifying-predictive-conditional-distribution---the-cart-method"><i class="fa fa-check"></i><b>3.3</b> Specifying predictive conditional distribution - the CART method</a></li>
+<li class="chapter" data-level="3.4" data-path="3-missing-data-multiple-imputation.html"><a href="3-missing-data-multiple-imputation.html#improving-computational-efficiency"><i class="fa fa-check"></i><b>3.4</b> Improving computational efficiency</a></li>
+<li class="chapter" data-level="3.5" data-path="3-missing-data-multiple-imputation.html"><a href="3-missing-data-multiple-imputation.html#imputation-results-and-predictive-checks"><i class="fa fa-check"></i><b>3.5</b> Imputation results and predictive checks</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-exploratory-data-analysis-eda.html"><a href="4-exploratory-data-analysis-eda.html"><i class="fa fa-check"></i><b>4</b> Exploratory Data Analysis (EDA)</a><ul>
+<li class="chapter" data-level="4.1" data-path="4-exploratory-data-analysis-eda.html"><a href="4-exploratory-data-analysis-eda.html#outcome-variable-and-covariates-selection"><i class="fa fa-check"></i><b>4.1</b> Outcome variable and covariates selection</a></li>
+<li class="chapter" data-level="4.2" data-path="4-exploratory-data-analysis-eda.html"><a href="4-exploratory-data-analysis-eda.html#inspection-of-each-covariate"><i class="fa fa-check"></i><b>4.2</b> Inspection of each covariate</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-model-fitting.html"><a href="5-model-fitting.html"><i class="fa fa-check"></i><b>5</b> Model Fitting</a><ul>
+<li class="chapter" data-level="5.1" data-path="5-model-fitting.html"><a href="5-model-fitting.html#logistic-regression-with-piecewise-linear-spline-application"><i class="fa fa-check"></i><b>5.1</b> Logistic regression with piecewise linear spline application</a></li>
+<li class="chapter" data-level="5.2" data-path="5-model-fitting.html"><a href="5-model-fitting.html#baseline"><i class="fa fa-check"></i><b>5.2</b> Baseline</a></li>
+<li class="chapter" data-level="5.3" data-path="5-model-fitting.html"><a href="5-model-fitting.html#model-form"><i class="fa fa-check"></i><b>5.3</b> Model Form</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html"><i class="fa fa-check"></i><b>6</b> Pooled Analysis</a><ul>
+<li class="chapter" data-level="6.1" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#estimates-of-model-coefficients"><i class="fa fa-check"></i><b>6.1</b> Estimates of model coefficients</a></li>
+<li class="chapter" data-level="6.2" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#pooled-results"><i class="fa fa-check"></i><b>6.2</b> Pooled results</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#frequentist-model"><i class="fa fa-check"></i><b>6.2.1</b> Frequentist model</a></li>
+<li class="chapter" data-level="6.2.2" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#bayesian-model"><i class="fa fa-check"></i><b>6.2.2</b> Bayesian Model</a></li>
+<li class="chapter" data-level="6.2.3" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#comparison-between-frequentist-and-bayesian-model"><i class="fa fa-check"></i><b>6.2.3</b> Comparison between Frequentist and Bayesian Model</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#inference-based-on-frequentist-model"><i class="fa fa-check"></i><b>6.3</b> Inference based on Frequentist model</a></li>
+<li class="chapter" data-level="6.4" data-path="6-pooled-analysis.html"><a href="6-pooled-analysis.html#conclusion-and-future-improvement"><i class="fa fa-check"></i><b>6.4</b> Conclusion and future improvement</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modeling Federal Employees Data to Predict Promotion</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
+<p>The Senior Executive Service (SES) was established by the Civil Service Reform Act (CSRA) in 1978. The introduction of the SES program is to select and develop high-level executives corps with exceptional management skills. Granted with high authority, members of the SES not only ensure productivity and efficiency within the government but also provide leadership to agencies across administration. Each executive holds key position below the top political appointees, and serves as primary link between these appointees and government career workers <span class="citation">(“Guide to the senior executive service,” 2017)</span>. Before the existence of the SES, the federal government was a fragmented bureaucracy. The creation of these centralized senior leaders therefore brought a “measure of coherence” to fulfil the larger corporate interests of the federal government <span class="citation">(Huddleston &amp; Boyer, 1996)</span>. With more than thirty years of establishment, the SES became “the backbone of Federal executive leadership”, where its members “play a crucial role in addressing unprecedented challenges facing our nation” <span class="citation">(“Statement of Jeffrey D. Zients, U.S. Congress, Senate Committee on Homeland Security and Governmental Affairs, Subcommittee on Oversight of Government Management, the Federal Workforce, and the District of Columbia,” 2011)</span>.<br />
+</p>
+<p>The Office of Personnel Management (OPM), also established by the CSRA, is tasked to manage the overall SES program. There are four types of appointments in the SES. The first type is career appointment, where incumbents are selected through merit-based staffing and usually hold permanent position within the government. The other three types are either non-career appointment or appointment with limited terms. Since the majority of the SES positions are career appointments, the primary interest of this study focuses on career-track SES.</p>
+<p>The selection of career-track SES is based on OPM’s Executive Core Qualifications (ECQ), which specifies a candidate’s competencies to build successful teams and bring out strategic integration within and outside the organization. Specifically, the OPM identifies various critical leadership skills for executives to succeed. For example, executives need to have the abilities to lead strategic changes and achieve organizational goals with high-quality results. Qualifications Review Boards (QRBs), consisting of three SES members from distinct agencies, further reviewed the approval of a candidate. </p>
+<p>Tthe recruiting of the SES position consists of multiple phases, and we are interested in understanding factors that affect promotion outcomes. For example, promotion bias towards people with technical expertise existed in the early establishment of the SES program. Furthermore, some of the outside observers have raised concern about the diversity of the SES. As a result, various studies have been conducted on the current SES system. For example, Powell and Butterfield investigated the impact of gender on the SES promotion outcomes <span class="citation">(Powell &amp; Butterfield, 1994)</span>. Shafritz argued that the quality of the SES can be improved with more racial, ethnic and gender diversity <span class="citation">(Carey, 2011)</span>. The motivation behind this project, therefore, is to build a statistical model in predicting promotion outcomes of the SES positions based on federal employees’ personal and career information.</p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="2-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": [["thesis.pdf", "PDF"], ["thesis.epub", "EPUB"], ["thesis.docx", "Word"]],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
